@@ -1,0 +1,229 @@
+.vista-mizuna,
+.vista-mizuna * {
+  box-sizing: border-box;
+}
+
+.vista-mizuna {
+  padding: 42px 0 40px;
+  background-color: #faf9f5;
+}
+
+/* Mismo ancho y margen interior que el bloque de etapas. */
+.vista-mizuna__contenedor {
+  width: min(1440px, 92%);
+  margin-inline: auto;
+  padding-inline: 30px;
+}
+
+.vista-mizuna__encabezado {
+  margin-bottom: 24px;
+}
+
+.vista-mizuna__etiqueta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  color: #477b38;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.vista-mizuna__etiqueta svg {
+  flex-shrink: 0;
+}
+
+.vista-mizuna h1 {
+  margin: 0;
+  color: #324824;
+  font-size: clamp(38px, 4vw, 58px);
+  line-height: 1.1;
+}
+
+.vista-mizuna__descripcion {
+  max-width: 470px;
+  margin: 14px 0 0;
+  color: #5e625b;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Laterales simétricos y una columna central limitada. */
+.vista-mizuna__contenido {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 460px)
+    minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+}
+
+.vista-mizuna__contenido > * {
+  min-width: 0;
+}
+
+.vista-mizuna__caracteristicas {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  width: 100%;
+  max-width: 260px;
+  gap: 32px;
+}
+
+.vista-mizuna .caracteristica {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.vista-mizuna .caracteristica > div {
+  min-width: 0;
+}
+
+.vista-mizuna .caracteristica__icono {
+  flex-shrink: 0;
+  color: #477b38;
+}
+
+.vista-mizuna .caracteristica h2 {
+  margin: 0 0 5px;
+  color: #477b38;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.vista-mizuna .caracteristica p {
+  margin: 0;
+  color: #444840;
+  font-size: 15px;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+/* Imagen y etiqueta centradas en el mismo eje. */
+.vista-mizuna__centro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+}
+
+.vista-mizuna__marco-imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 460px;
+  height: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+  color: #687367;
+  text-align: center;
+}
+
+.vista-mizuna__marco-imagen img {
+  position: static;
+  display: block;
+  flex: 0 1 auto;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+}
+
+.vista-mizuna__etapa-seleccionada {
+  position: static;
+  inset: auto;
+  display: grid;
+  align-self: center;
+  gap: 6px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 12px auto 0;
+  padding: 12px 18px;
+  border: 1px solid #e0d8e3;
+  border-radius: 14px;
+  background-color: #fffdfa;
+  color: #324824;
+  text-align: center;
+  transform: none;
+}
+
+.vista-mizuna__etapa-seleccionada span {
+  color: #70517d;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.vista-mizuna__etapa-seleccionada strong {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Pantallas intermedias. */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .vista-mizuna__contenido {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 340px)
+      minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .vista-mizuna__marco-imagen {
+    height: 340px;
+  }
+}
+
+/* Móviles y tabletas: imagen primero y características debajo. */
+@media (max-width: 900px) {
+  .vista-mizuna {
+    padding: 30px 0;
+  }
+
+  .vista-mizuna__contenido {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .vista-mizuna__centro {
+    grid-row: 1;
+  }
+
+  .vista-mizuna__marco-imagen {
+    max-width: 380px;
+    height: 300px;
+  }
+
+  .vista-mizuna__caracteristicas {
+    max-width: 460px;
+    gap: 24px;
+  }
+
+  .vista-mizuna__descripcion {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 800px) {
+  .vista-mizuna__contenedor {
+    padding-inline: 16px;
+  }
+}

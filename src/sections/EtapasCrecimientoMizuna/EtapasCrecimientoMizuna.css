@@ -1,0 +1,224 @@
+.etapas {
+  padding: 0 0 28px;
+  background-color: #faf9f5;
+}
+
+.etapas__contenedor {
+  box-sizing: border-box;
+  width: min(1440px, 92%);
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #d9ddcf;
+  border-radius: 24px;
+  background-color: #fffdfa;
+}
+
+.etapas__encabezado {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 14px;
+}
+
+.etapas__etiqueta {
+  margin: 0 0 10px;
+  color: #70517d;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.etapas__titulo {
+  margin: 0;
+  color: #324824;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.2;
+}
+
+.etapas__descripcion {
+  max-width: 520px;
+  min-height: 3em;
+  margin: 0;
+  color: #687367;
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.etapas__desplazable {
+  overflow-x: auto;
+  padding: 6px 4px 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #a4b492 #f0f1eb;
+}
+
+.etapas__contenido {
+  min-width: 680pxpx;
+}
+
+.etapas__barra {
+  /* Los extremos coinciden con el centro de la primera y última tarjeta. */
+  margin-inline: calc(50% / var(--cantidad-etapas));
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.etapas__control {
+  --diametro: 32px;
+
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 calc(100% + var(--diametro));
+  width: calc(100% + var(--diametro));
+  height: 6px;
+  margin: 0 calc(var(--diametro) / -2);
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    #82b638 0%,
+    #70517d var(--progreso),
+    #c9cec1 var(--progreso),
+    #c9cec1 100%
+  );
+  cursor: pointer;
+}
+
+.etapas__control::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.etapas__control::-webkit-slider-thumb {
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  width: var(--diametro);
+  height: var(--diametro);
+  margin-top: -13px;
+  border: 3px solid #fffdfa;
+  border-radius: 50%;
+  background-color: #70517d;
+  box-shadow: 0 0 0 1px #70517d;
+  cursor: grab;
+}
+
+.etapas__control::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.etapas__control::-moz-range-thumb {
+  box-sizing: border-box;
+  width: var(--diametro);
+  height: var(--diametro);
+  border: 3px solid #fffdfa;
+  border-radius: 50%;
+  background-color: #70517d;
+  box-shadow: 0 0 0 1px #70517d;
+  cursor: grab;
+}
+
+.etapas__control:focus-visible {
+  outline: 2px solid #70517d;
+  outline-offset: 16px;
+}
+
+.etapas__lista {
+  display: grid;
+  grid-template-columns: repeat(var(--cantidad-etapas), minmax(0, 1fr));
+}
+
+.etapa {
+  box-sizing: border-box;
+  min-width: 0;
+  margin: 0 6px;
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: transparent;
+  color: #303b30;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.etapa:hover {
+  background-color: #f4f4ee;
+}
+
+.etapa--activa,
+.etapa--activa:hover {
+  border-color: #d6c8de;
+  background-color: #f1ebf4;
+}
+
+.etapa:focus-visible {
+  outline: 2px solid #70517d;
+  outline-offset: 2px;
+}
+
+.etapa__numero {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: #7a8076;
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.etapa--activa .etapa__numero {
+  background-color: #70517d;
+}
+
+.etapa__nombre {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.etapa__subtitulo {
+  color: #687367;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+@media (max-width: 800px) {
+  .etapas__contenedor {
+    padding: 22px 16px;
+  }
+
+  .etapas__encabezado {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .etapas__descripcion {
+    max-width: none;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .etapa {
+    transition: none;
+  }
+}
