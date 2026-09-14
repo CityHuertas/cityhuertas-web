@@ -1,0 +1,131 @@
+.site-header {
+    position: relative;
+    z-index: 10;
+    color: white;
+    background-color: #324824;
+    box-shadow: 0 4px 20px rgba(20, 55, 30, 0.15);
+}
+
+.header-container {
+    width: min(1440px, 92%);
+    min-height: 78px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.brand-logo {
+    display: block;
+    width: 270px;
+    height: 64px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.brand-logo {
+    width: 210px;
+    height: 54px;
+}
+
+.navigation {
+    min-height: 78px;
+    display: flex;
+    align-items: stretch;
+    gap: 30px;
+}
+
+.navigation a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.navigation a:hover,
+.navigation a.active {
+    color: #b8db72;
+}
+
+.navigation a.active::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-color: #9aca3c;
+}
+
+.sustainability-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+}
+
+.sustainability-message svg {
+    color: #8fcf44;
+}
+
+.menu-button {
+    display: none;
+    padding: 6px;
+    border: 0;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+}
+
+@media (max-width: 1050px) {
+    .sustainability-message {
+    display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .header-container {
+    min-height: 68px;
+    }
+
+    .menu-button {
+    display: flex;
+    }
+
+    .navigation {
+    position: absolute;
+    top: 68px;
+    right: 0;
+    left: 0;
+    display: none;
+    height: auto;
+    min-height: auto;
+    padding: 20px;
+    flex-direction: column;
+    gap: 18px;
+    background-color: #183c24;
+    }
+
+    .navigation-open {
+    display: flex;
+    }
+
+    .navigation a {
+    padding: 4px 0;
+    }
+
+    .navigation a.active::after {
+    display: none;
+    }
+}
