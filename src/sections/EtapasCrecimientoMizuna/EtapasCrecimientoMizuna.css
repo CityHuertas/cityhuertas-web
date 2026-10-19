@@ -1,6 +1,6 @@
 .etapas {
   padding: 0 0 28px;
-  background-color: #faf9f5;
+  background-color: var(--fondo);
 }
 
 .etapas__contenedor {
@@ -10,7 +10,7 @@
   padding: 30px;
   border: 1px solid #d9ddcf;
   border-radius: 24px;
-  background-color: #fffdfa;
+  background-color: var(--fondo-tarjeta);
 }
 
 .etapas__encabezado {
@@ -23,7 +23,7 @@
 
 .etapas__etiqueta {
   margin: 0 0 10px;
-  color: #70517d;
+  color: var(--morado);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -32,7 +32,7 @@
 
 .etapas__titulo {
   margin: 0;
-  color: #324824;
+  color: var(--verde-oscuro);
   font-size: clamp(24px, 3vw, 32px);
   line-height: 1.2;
 }
@@ -55,7 +55,7 @@
 }
 
 .etapas__contenido {
-  min-width: 680pxpx;
+  min-width: 680px;
 }
 
 .etapas__barra {
@@ -82,7 +82,7 @@
   background: linear-gradient(
     to right,
     #82b638 0%,
-    #70517d var(--progreso),
+    var(--morado) var(--progreso),
     #c9cec1 var(--progreso),
     #c9cec1 100%
   );
@@ -102,10 +102,10 @@
   width: var(--diametro);
   height: var(--diametro);
   margin-top: -13px;
-  border: 3px solid #fffdfa;
+  border: 3px solid var(--fondo-tarjeta);
   border-radius: 50%;
-  background-color: #70517d;
-  box-shadow: 0 0 0 1px #70517d;
+  background-color: var(--morado);
+  box-shadow: 0 0 0 1px var(--morado);
   cursor: grab;
 }
 
@@ -119,15 +119,15 @@
   box-sizing: border-box;
   width: var(--diametro);
   height: var(--diametro);
-  border: 3px solid #fffdfa;
+  border: 3px solid var(--fondo-tarjeta);
   border-radius: 50%;
-  background-color: #70517d;
-  box-shadow: 0 0 0 1px #70517d;
+  background-color: var(--morado);
+  box-shadow: 0 0 0 1px var(--morado);
   cursor: grab;
 }
 
 .etapas__control:focus-visible {
-  outline: 2px solid #70517d;
+  outline: 2px solid var(--morado);
   outline-offset: 16px;
 }
 
@@ -168,7 +168,7 @@
 }
 
 .etapa:focus-visible {
-  outline: 2px solid #70517d;
+  outline: 2px solid var(--morado);
   outline-offset: 2px;
 }
 
@@ -185,7 +185,7 @@
 }
 
 .etapa--activa .etapa__numero {
-  background-color: #70517d;
+  background-color: var(--morado);
 }
 
 .etapa__nombre {

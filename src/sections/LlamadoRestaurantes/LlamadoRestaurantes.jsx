@@ -20,7 +20,7 @@ function LlamadoRestaurantes() {
 
         <a
           className="llamado-restaurantes__boton"
-          href="#contacto"
+          href="#/contacto"
         >
           Solicitar información
         </a>

@@ -1,11 +1,12 @@
+/* Estilos compartidos por la página de inicio y las secciones pendientes. */
 .pagina-inicio,
 .seccion-pendiente {
   box-sizing: border-box;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 78px);
   padding: 70px 4%;
   display: grid;
   place-items: center;
-  background-color: #faf9f5;
+  background-color: var(--fondo);
 }
 
 .pagina-inicio__contenido,
@@ -18,7 +19,7 @@
 .seccion-pendiente span {
   display: block;
   margin: 0 0 12px;
-  color: #70517d;
+  color: var(--morado);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -29,7 +30,7 @@
 .seccion-pendiente h1 {
   max-width: 850px;
   margin: 0 auto;
-  color: #324824;
+  color: var(--verde-oscuro);
   font-size: clamp(42px, 6vw, 76px);
   line-height: 1.08;
 }
@@ -38,7 +39,7 @@
 .seccion-pendiente p {
   max-width: 650px;
   margin: 24px auto 0;
-  color: #5e625b;
+  color: var(--texto-suave);
   font-size: 18px;
   line-height: 1.65;
 }
@@ -51,13 +52,17 @@
   margin-top: 32px;
 }
 
-.pagina-inicio__acciones button {
+.pagina-inicio__acciones a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 48px;
+  text-decoration: none;
   padding: 0 22px;
-  border: 1px solid #477b38;
+  border: 1px solid var(--verde);
   border-radius: 10px;
   color: white;
-  background-color: #477b38;
+  background-color: var(--verde);
   font: inherit;
   font-weight: 700;
   cursor: pointer;
@@ -67,25 +72,30 @@
     transform 0.2s ease;
 }
 
-.pagina-inicio__acciones button:hover {
-  background-color: #324824;
+.pagina-inicio__acciones a:hover {
+  background-color: var(--verde-oscuro);
   transform: translateY(-2px);
 }
 
 .pagina-inicio__acciones .pagina-inicio__boton-secundario {
-  color: #477b38;
+  color: var(--verde);
   background-color: transparent;
+}
+
+.pagina-inicio__acciones a:focus-visible {
+  outline: 3px solid rgba(118, 184, 42, 0.45);
+  outline-offset: 3px;
 }
 
 .pagina-inicio__acciones .pagina-inicio__boton-secundario:hover {
   color: white;
-  background-color: #477b38;
+  background-color: var(--verde);
 }
 
 @media (max-width: 650px) {
   .pagina-inicio,
   .seccion-pendiente {
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - 68px);
     padding: 50px 22px;
   }
 
@@ -98,7 +108,7 @@
     flex-direction: column;
   }
 
-  .pagina-inicio__acciones button {
+  .pagina-inicio__acciones a {
     width: 100%;
   }
 }

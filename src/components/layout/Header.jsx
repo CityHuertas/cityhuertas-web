@@ -2,58 +2,28 @@ import { Leaf, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 import logoCityHuertas from '../../assets/images/cityhuertas.png'
+import navegacion from '../../data/navegacion'
+import { enlaceA } from '../../hooks/useRuta'
 import './Header.css'
 
-const navigation = [
-  {
-    nombre: 'Inicio',
-    id: 'inicio',
-  },
-  {
-    nombre: 'Sobre agroecología',
-    id: 'agroecologia',
-  },
-  {
-    nombre: 'Plantas',
-    id: 'plantas',
-  },
-  {
-    nombre: 'Procesos',
-    id: 'procesos',
-  },
-  {
-    nombre: 'Recursos',
-    id: 'recursos',
-  },
-  {
-    nombre: 'Contacto',
-    id: 'contacto',
-  },
-]
-
-function Header({ seccionActiva, alNavegar }) {
+function Header({ rutaActual }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
-  const seleccionarSeccion = (evento, id) => {
-    evento.preventDefault()
-    alNavegar(id)
-    setMenuOpen(false)
-  }
+  const cerrarMenu = () => setMenuOpen(false)
 
   return (
     <header className="site-header">
       <div className="header-container">
         <a
           className="brand"
-          href="#inicio"
-          onClick={(evento) =>
-            seleccionarSeccion(evento, 'inicio')
-          }
+          href={enlaceA('inicio')}
+          aria-label="CityHuertas, ir al inicio"
+          onClick={cerrarMenu}
         >
           <img
             className="brand-logo"
             src={logoCityHuertas}
-            alt="CityHuertas"
+            alt=""
           />
         </a>
 
@@ -81,17 +51,13 @@ function Header({ seccionActiva, alNavegar }) {
           id="navegacion-principal"
           aria-label="Navegación principal"
         >
-          {navigation.map(({ nombre, id }) => (
+          {navegacion.map(({ nombre, id }) => (
             <a
-              className={seccionActiva === id ? 'active' : ''}
-              href={`#${id}`}
+              className={rutaActual === id ? 'active' : ''}
+              href={enlaceA(id)}
               key={id}
-              aria-current={
-                seccionActiva === id ? 'page' : undefined
-              }
-              onClick={(evento) =>
-                seleccionarSeccion(evento, id)
-              }
+              aria-current={rutaActual === id ? 'page' : undefined}
+              onClick={cerrarMenu}
             >
               {nombre}
             </a>

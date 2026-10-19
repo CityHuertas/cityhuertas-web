@@ -1,14 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 import Header from './components/layout/Header'
+import Footer from './components/layout/Footer'
+import Inicio from './pages/Inicio/Inicio'
+import Plantas from './pages/Plantas/Plantas'
+import SeccionPendiente from './pages/SeccionPendiente/SeccionPendiente'
 import Agroecologia from './sections/Agroecologia/Agroecologia'
-import VistaGeneralMizuna from './sections/VistaGeneralMizuna/VistaGeneralMizuna'
-import EtapasCrecimiento from './sections/EtapasCrecimientoMizuna/EtapasCrecimientoMizuna'
-import DatoCuriosoMizuna from './sections/DatoCuriosoMizuna/DatoCuriosoMizuna'
-import LlamadoRestaurantes from './sections/LlamadoRestaurantes/LlamadoRestaurantes'
-import etapasMizuna from './data/etapasMizuna'
-
-import './App.css'
+import navegacion from './data/navegacion'
+import { useRuta } from './hooks/useRuta'
 
 const seccionesPendientes = {
   procesos: {
@@ -28,96 +27,60 @@ const seccionesPendientes = {
   },
 }
 
+const paginaNoEncontrada = {
+  titulo: 'Página no encontrada',
+  descripcion: 'La dirección que buscas no existe o cambió de lugar.',
+  enlaceInicio: true,
+}
+
 function App() {
-  const [seccionActiva, setSeccionActiva] = useState('inicio')
-  const [indiceEtapa, setIndiceEtapa] = useState(0)
+  const ruta = useRuta()
+  const contenidoRef = useRef(null)
+  const primeraCarga = useRef(true)
 
-  const etapaSeleccionada = etapasMizuna[indiceEtapa]
+  const seccion = navegacion.find(({ id }) => id === ruta)
 
-  const cambiarSeccion = (seccion) => {
-    setSeccionActiva(seccion)
+  useEffect(() => {
+    document.title = seccion
+      ? `${seccion.titulo} | CityHuertas`
+      : 'CityHuertas'
 
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
+    if (primeraCarga.current) {
+      primeraCarga.current = false
+      return
+    }
+
+    // Al cambiar de sección: volver arriba y llevar el foco al contenido
+    // para que los lectores de pantalla anuncien la nueva página.
+    window.scrollTo({ top: 0 })
+    contenidoRef.current?.focus({ preventScroll: true })
+  }, [ruta, seccion])
+
+  let pagina
+
+  if (ruta === 'inicio') {
+    pagina = <Inicio />
+  } else if (ruta === 'agroecologia') {
+    pagina = <Agroecologia />
+  } else if (ruta === 'plantas') {
+    pagina = <Plantas />
+  } else {
+    pagina = (
+      <SeccionPendiente
+        {...(seccionesPendientes[ruta] ?? paginaNoEncontrada)}
+      />
+    )
   }
-
-  const seccionPendiente = seccionesPendientes[seccionActiva]
 
   return (
     <>
-      <Header
-        seccionActiva={seccionActiva}
-        alNavegar={cambiarSeccion}
-      />
+      <Header rutaActual={ruta} />
 
-      <main>
-        {seccionActiva === 'inicio' && (
-          <section className="pagina-inicio">
-            <div className="pagina-inicio__contenido">
-              <p className="pagina-inicio__etiqueta">
-                Agroecología urbana
-              </p>
-
-              <h1>
-                Conoce el alimento desde su origen
-              </h1>
-
-              <p className="pagina-inicio__descripcion">
-                Explora qué es la agroecología y descubre cómo cambian las
-                plantas durante cada etapa de su crecimiento.
-              </p>
-
-              <div className="pagina-inicio__acciones">
-                <button
-                  type="button"
-                  onClick={() => cambiarSeccion('agroecologia')}
-                >
-                  Conocer la agroecología
-                </button>
-
-                <button
-                  className="pagina-inicio__boton-secundario"
-                  type="button"
-                  onClick={() => cambiarSeccion('plantas')}
-                >
-                  Explorar las plantas
-                </button>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {seccionActiva === 'agroecologia' && (
-          <Agroecologia />
-        )}
-
-        {seccionActiva === 'plantas' && (
-          <>
-            <VistaGeneralMizuna etapa={etapaSeleccionada} />
-
-            <EtapasCrecimiento
-              etapas={etapasMizuna}
-              indiceEtapa={indiceEtapa}
-              alCambiarEtapa={setIndiceEtapa}
-            />
-
-            <DatoCuriosoMizuna />
-            <LlamadoRestaurantes />
-          </>
-        )}
-
-        {seccionPendiente && (
-          <section className="seccion-pendiente">
-            <div className="seccion-pendiente__contenido">
-              <span>CityHuertas</span>
-              <h1>{seccionPendiente.titulo}</h1>
-              <p>{seccionPendiente.descripcion}</p>
-            </div>
-          </section>
-        )}
+      <main id="contenido" ref={contenidoRef} tabIndex={-1}>
+        {pagina}
       </main>
+
+      <Footer />
     </>
   )
 }

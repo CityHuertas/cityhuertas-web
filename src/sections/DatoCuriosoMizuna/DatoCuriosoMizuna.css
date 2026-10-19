@@ -1,6 +1,6 @@
 .dato-curioso {
   padding: 0 0 30px;
-  background-color: #faf9f5;
+  background-color: var(--fondo);
 }
 
 .dato-curioso__contenedor {
@@ -35,7 +35,7 @@
 
 .dato-curioso__contenido h2 {
   margin: 0 0 5px;
-  color: #324824;
+  color: var(--verde-oscuro);
   font-size: 16px;
   font-weight: 800;
   text-transform: uppercase;

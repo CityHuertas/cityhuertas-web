@@ -1,6 +1,6 @@
 .llamado-restaurantes {
   border-top: 1px solid #deddd5;
-  background-color: #faf9f5;
+  background-color: var(--fondo);
 }
 
 .llamado-restaurantes__contenedor {
@@ -27,7 +27,7 @@
 
 .llamado-restaurantes__contenido h2 {
   margin: 0;
-  color: #324824;
+  color: var(--verde-oscuro);
   font-size: 15px;
   font-weight: 800;
   text-transform: uppercase;
@@ -61,7 +61,7 @@
 }
 
 .llamado-restaurantes__boton:hover {
-  background-color: #324824;
+  background-color: var(--verde-oscuro);
   transform: translateY(-2px);
 }
 

@@ -1,7 +1,18 @@
+/* Colores de marca: úsalos con var(--nombre) en lugar del código hexadecimal. */
 :root {
+  --verde-oscuro: #324824;
+  --verde: #477b38;
+  --verde-claro: #8caf4a;
+  --morado: #70517d;
+  --texto: #253229;
+  --texto-suave: #5e625b;
+  --fondo: #faf9f5;
+  --fondo-tarjeta: #fffdfa;
+  --borde: #ddd9ce;
+
   font-family: Arial, Helvetica, sans-serif;
-  color: #253229;
-  background-color: #f8f6f1;
+  color: var(--texto);
+  background-color: var(--fondo);
   line-height: 1.5;
   font-weight: 400;
 }
@@ -20,11 +31,32 @@ body {
   min-height: 100vh;
 }
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
 button,
 a {
   font: inherit;
 }
 
-main {
-  padding: 40px;
+img {
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* El contenido recibe el foco al cambiar de sección (accesibilidad), sin mostrar un recuadro. */
+main:focus {
+  outline: none;
 }

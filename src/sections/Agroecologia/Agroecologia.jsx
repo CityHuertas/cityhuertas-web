@@ -58,9 +58,9 @@ function Agroecologia() {
             Una forma de cuidar la vida
           </p>
 
-          <h2 id="titulo-agroecologia">
+          <h1 id="titulo-agroecologia">
             ¿Qué es la agroecología?
-          </h2>
+          </h1>
 
           <p>
             Comprenderla comienza por mirar todo lo que existe alrededor de un
@@ -120,7 +120,7 @@ function Agroecologia() {
 
             <div>
               <p>Una mirada integral</p>
-              <h3>Sus cuatro dimensiones</h3>
+              <h2>Sus cuatro dimensiones</h2>
             </div>
           </div>
 
@@ -131,7 +131,7 @@ function Agroecologia() {
                   <Icono size={27} strokeWidth={1.8} aria-hidden="true" />
                 </div>
 
-                <h4>{titulo}</h4>
+                <h3>{titulo}</h3>
                 <p>{descripcion}</p>
               </article>
             ))}
@@ -148,7 +148,7 @@ function Agroecologia() {
               Agroecología en la práctica
             </p>
 
-            <h3>La experiencia de Finca Micaela</h3>
+            <h2>La experiencia de Finca Micaela</h2>
 
             <p>
               En la finca, cultivar también significa cuidar el territorio.
