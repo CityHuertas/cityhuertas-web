@@ -4,9 +4,11 @@ import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Inicio from './pages/Inicio/Inicio'
 import Plantas from './pages/Plantas/Plantas'
+import Recursos from './pages/Recursos/Recursos'
 import SeccionPendiente from './pages/SeccionPendiente/SeccionPendiente'
 import Agroecologia from './sections/Agroecologia/Agroecologia'
 import navegacion from './data/navegacion'
+import fotos from './data/fotos'
 import { useRuta } from './hooks/useRuta'
 
 const seccionesPendientes = {
@@ -14,23 +16,21 @@ const seccionesPendientes = {
     titulo: 'Procesos',
     descripcion:
       'Aquí podrás conocer los procesos utilizados en la producción agroecológica.',
-  },
-  recursos: {
-    titulo: 'Recursos',
-    descripcion:
-      'Próximamente encontrarás materiales para aprender más sobre agroecología.',
+    foto: fotos.riego,
   },
   contacto: {
     titulo: 'Contacto',
     descripcion:
       'Esta sección permitirá comunicarse con CityHuertas y solicitar información.',
+    foto: fotos.plantulas,
   },
 }
 
 const paginaNoEncontrada = {
   titulo: 'Página no encontrada',
   descripcion: 'La dirección que buscas no existe o cambió de lugar.',
-  enlaceInicio: true,
+  foto: fotos.huerta,
+  noEncontrada: true,
 }
 
 function App() {
@@ -64,6 +64,8 @@ function App() {
     pagina = <Agroecologia />
   } else if (ruta === 'plantas') {
     pagina = <Plantas />
+  } else if (ruta === 'recursos') {
+    pagina = <Recursos />
   } else {
     pagina = (
       <SeccionPendiente
@@ -77,7 +79,10 @@ function App() {
       <Header rutaActual={ruta} />
 
       <main id="contenido" ref={contenidoRef} tabIndex={-1}>
-        {pagina}
+        {/* La clave cambia con la ruta: cada sección entra con un fundido suave. */}
+        <div className="pagina" key={ruta}>
+          {pagina}
+        </div>
       </main>
 
       <Footer />

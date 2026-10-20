@@ -1,90 +1,42 @@
 .dato-curioso {
-  padding: 0 0 30px;
-  background-color: var(--fondo);
+  width: var(--ancho);
+  margin: 0 auto;
+  padding: 24px 0 40px;
 }
 
 .dato-curioso__contenedor {
-  width: min(1440px, 92%);
-  min-height: 105px;
-  margin: 0 auto;
-  padding: 18px 30px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 22px;
-  border: 1px solid #d4dabf;
-  border-radius: 18px;
-  background: linear-gradient(
-    100deg,
-    rgba(239, 244, 224, 0.95),
-    rgba(247, 248, 238, 0.95)
-  );
+  grid-template-columns: auto 1fr;
+  gap: 18px;
+  max-width: 900px;
+  padding: 22px 26px;
+  border-left: 5px solid var(--verde-claro);
+  border-radius: 4px 18px 18px 4px;
+  background-color: var(--hoja);
 }
 
-.dato-curioso__icono-principal {
-  width: 64px;
-  height: 64px;
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  border-radius: 50%;
-  color: white;
-  background-color: #76b82a;
-  box-shadow: 0 4px 12px rgba(69, 105, 36, 0.18);
+.dato-curioso__icono {
+  color: var(--verde);
 }
 
-.dato-curioso__contenido h2 {
-  margin: 0 0 5px;
+.dato-curioso h2 {
+  margin: 0 0 6px;
   color: var(--verde-oscuro);
-  font-size: 16px;
-  font-weight: 800;
-  text-transform: uppercase;
+  font-size: 20px;
 }
 
-.dato-curioso__contenido p {
-  max-width: 1050px;
+.dato-curioso p {
   margin: 0;
-  color: #454a42;
-  font-size: 14px;
-  line-height: 1.55;
+  color: var(--texto);
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-.dato-curioso__imagen-pendiente {
-  width: 120px;
-  display: grid;
-  place-items: center;
-  color: #7e8d72;
-}
+@media (max-width: 650px) {
 
-@media (max-width: 800px) {
-  .dato-curioso__contenedor {
-    padding: 20px;
-    grid-template-columns: auto 1fr;
-    align-items: start;
-    gap: 16px;
-  }
-
-  .dato-curioso__icono-principal {
-    width: 52px;
-    height: 52px;
-  }
-
-  .dato-curioso__imagen-pendiente {
-    display: none;
-  }
-
-  .dato-curioso__contenido p {
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 520px) {
   .dato-curioso__contenedor {
     grid-template-columns: 1fr;
-  }
-
-  .dato-curioso__icono-principal {
-    width: 48px;
-    height: 48px;
+    gap: 10px;
+    padding: 20px;
   }
 }

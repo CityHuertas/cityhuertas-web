@@ -1,35 +1,40 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-import VistaGeneralMizuna from '../../sections/VistaGeneralMizuna/VistaGeneralMizuna'
-import EtapasCrecimiento from '../../sections/EtapasCrecimientoMizuna/EtapasCrecimientoMizuna'
+import Portada from '../../components/Portada/Portada'
+import fotos from '../../data/fotos'
+import FichaMizuna from '../../sections/FichaMizuna/FichaMizuna'
 import DatoCuriosoMizuna from '../../sections/DatoCuriosoMizuna/DatoCuriosoMizuna'
 import LlamadoRestaurantes from '../../sections/LlamadoRestaurantes/LlamadoRestaurantes'
 import etapasMizuna from '../../data/etapasMizuna'
 
-function Plantas() {
-  const [indiceEtapa, setIndiceEtapa] = useState(0)
+// Permite abrir la ficha en una etapa concreta: #/plantas?etapa=3
+function leerEtapaInicial() {
+  const consulta = window.location.hash.split('?')[1] ?? ''
+  const etapa = Number(new URLSearchParams(consulta).get('etapa'))
 
-  // Descarga las imágenes de todas las etapas por adelantado para que
-  // el cambio de etapa sea inmediato y la foto no parpadee.
-  useEffect(() => {
-    etapasMizuna.forEach(({ imagen }) => {
-      const precarga = new Image()
-      precarga.src = imagen
-    })
-  }, [])
+  return etapa >= 1 && etapa <= etapasMizuna.length ? etapa - 1 : 0
+}
+
+function Plantas() {
+  const [indiceEtapa, setIndiceEtapa] = useState(leerEtapaInicial)
 
   return (
     <>
-      <VistaGeneralMizuna etapa={etapasMizuna[indiceEtapa]} />
+      <Portada
+        foto={fotos.acelga}
+        idTitulo="titulo-plantas"
+        titulo="Plantas"
+        descripcion="Fichas interactivas de lo que se cultiva en la finca: cómo cambian su color, su sabor y su textura mientras crecen. Empezamos con la Mizuna morada."
+      />
 
-      <EtapasCrecimiento
+      <FichaMizuna
         etapas={etapasMizuna}
         indiceEtapa={indiceEtapa}
         alCambiarEtapa={setIndiceEtapa}
       />
 
       <DatoCuriosoMizuna />
-      <LlamadoRestaurantes />
+      <LlamadoRestaurantes etapa={etapasMizuna[indiceEtapa]} />
     </>
   )
 }

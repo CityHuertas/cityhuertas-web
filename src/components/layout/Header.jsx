@@ -1,18 +1,51 @@
-import { Leaf, Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 import logoCityHuertas from '../../assets/images/cityhuertas.png'
 import navegacion from '../../data/navegacion'
 import { enlaceA } from '../../hooks/useRuta'
 import './Header.css'
 
-function Header({ rutaActual }) {
-  const [menuOpen, setMenuOpen] = useState(false)
+// Contacto va aparte, como botón destacado.
+const enlaces = navegacion.filter(({ id }) => id !== 'contacto')
 
-  const cerrarMenu = () => setMenuOpen(false)
+function Header({ rutaActual }) {
+  const [menuAbierto, setMenuAbierto] = useState(false)
+  const [conScroll, setConScroll] = useState(false)
+
+  // Transparente sobre la foto de portada; sólido al bajar.
+  useEffect(() => {
+    const revisar = () => setConScroll(window.scrollY > 24)
+
+    revisar()
+    window.addEventListener('scroll', revisar, { passive: true })
+    return () => window.removeEventListener('scroll', revisar)
+  }, [])
+
+  // El menú del celular se cierra con Escape.
+  useEffect(() => {
+    if (!menuAbierto) return
+
+    const alPresionar = (evento) => {
+      if (evento.key === 'Escape') setMenuAbierto(false)
+    }
+
+    window.addEventListener('keydown', alPresionar)
+    return () => window.removeEventListener('keydown', alPresionar)
+  }, [menuAbierto])
+
+  const cerrarMenu = () => setMenuAbierto(false)
+
+  const clases = [
+    'site-header',
+    (conScroll || menuAbierto) && 'site-header--solido',
+    menuAbierto && 'site-header--abierto',
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   return (
-    <header className="site-header">
+    <header className={clases}>
       <div className="header-container">
         <a
           className="brand"
@@ -20,40 +53,17 @@ function Header({ rutaActual }) {
           aria-label="CityHuertas, ir al inicio"
           onClick={cerrarMenu}
         >
-          <img
-            className="brand-logo"
-            src={logoCityHuertas}
-            alt=""
-          />
+          <img className="brand-logo" src={logoCityHuertas} alt="" />
         </a>
 
-        <button
-          className="menu-button"
-          type="button"
-          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-          aria-expanded={menuOpen}
-          aria-controls="navegacion-principal"
-          onClick={() => setMenuOpen((estado) => !estado)}
-        >
-          {menuOpen ? (
-            <X aria-hidden="true" />
-          ) : (
-            <Menu aria-hidden="true" />
-          )}
-        </button>
-
         <nav
-          className={
-            menuOpen
-              ? 'navigation navigation-open'
-              : 'navigation'
-          }
+          className="navigation"
           id="navegacion-principal"
           aria-label="Navegación principal"
         >
-          {navegacion.map(({ nombre, id }) => (
+          {enlaces.map(({ nombre, id }) => (
             <a
-              className={rutaActual === id ? 'active' : ''}
+              className={rutaActual === id ? 'active' : undefined}
               href={enlaceA(id)}
               key={id}
               aria-current={rutaActual === id ? 'page' : undefined}
@@ -62,17 +72,27 @@ function Header({ rutaActual }) {
               {nombre}
             </a>
           ))}
+
+          <a
+            className={`navigation__contacto ${rutaActual === 'contacto' ? 'active' : ''}`}
+            href={enlaceA('contacto')}
+            aria-current={rutaActual === 'contacto' ? 'page' : undefined}
+            onClick={cerrarMenu}
+          >
+            Contacto
+          </a>
         </nav>
 
-        <div className="sustainability-message">
-          <Leaf size={24} aria-hidden="true" />
-
-          <span>
-            Cultivamos futuro
-            <br />
-            de forma sostenible
-          </span>
-        </div>
+        <button
+          className="menu-button"
+          type="button"
+          aria-label={menuAbierto ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={menuAbierto}
+          aria-controls="navegacion-principal"
+          onClick={() => setMenuAbierto((estado) => !estado)}
+        >
+          {menuAbierto ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </button>
       </div>
     </header>
   )

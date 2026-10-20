@@ -1,5 +1,6 @@
 import logoBlanco from '../../assets/images/cityhuertas-isotipo-blanco.png'
 import navegacion from '../../data/navegacion'
+import { autoresFotos } from '../../data/fotos'
 import { enlaceA } from '../../hooks/useRuta'
 import './Footer.css'
 
@@ -25,10 +26,16 @@ function Footer() {
         </nav>
       </div>
 
-      <p className="footer-creditos">
-        © {new Date().getFullYear()} CityHuertas · Caso inicial: Mizuna morada
-        de Finca Micaela
-      </p>
+      <div className="footer-creditos">
+        <p>© {new Date().getFullYear()} CityHuertas</p>
+        <p>
+          Fotografías de{' '}
+          <a href="https://unsplash.com" target="_blank" rel="noreferrer">
+            Unsplash
+          </a>
+          : {autoresFotos.join(', ')}.
+        </p>
+      </div>
     </footer>
   )
 }

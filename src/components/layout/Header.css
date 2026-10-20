@@ -1,126 +1,153 @@
+/* Fijo arriba: transparente sobre la portada y sólido al bajar. */
 .site-header {
-    position: relative;
-    z-index: 10;
-    color: white;
-    background-color: var(--verde-oscuro);
-    box-shadow: 0 4px 20px rgba(20, 55, 30, 0.15);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  color: white;
+  background-color: transparent;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.site-header--solido {
+  background-color: rgba(20, 32, 20, 0.92);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(12px);
 }
 
 .header-container {
-    width: min(1440px, 92%);
-    min-height: 78px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
+  width: var(--ancho);
+  height: var(--alto-header);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
 }
 
 .brand {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.brand:focus-visible {
+  outline: 2px solid var(--lima);
+  outline-offset: 4px;
 }
 
 .brand-logo {
-    display: block;
-    width: 210px;
-    height: 54px;
-    object-fit: contain;
-    object-position: left center;
+  display: block;
+  width: 190px;
+  height: 48px;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .navigation {
-    min-height: 78px;
-    display: flex;
-    align-items: stretch;
-    gap: 30px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .navigation a {
-    position: relative;
-    display: flex;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
+  padding: 9px 14px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.navigation a:hover,
+.navigation a:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
 .navigation a.active {
-    color: #b8db72;
+  color: var(--noche);
+  background-color: rgba(255, 255, 255, 0.92);
 }
 
-.navigation a.active::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 4px;
-    background-color: #9aca3c;
+.navigation a:focus-visible {
+  outline: 2px solid var(--lima);
+  outline-offset: 2px;
 }
 
-.sustainability-message {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 12px;
+.navigation .navigation__contacto {
+  margin-left: 10px;
+  padding-inline: 20px;
+  color: var(--noche);
+  background-color: var(--lima);
+  font-weight: 700;
 }
 
-.sustainability-message svg {
-    color: #8fcf44;
+.navigation .navigation__contacto:hover,
+.navigation .navigation__contacto.active {
+  color: var(--noche);
+  background-color: white;
 }
 
 .menu-button {
-    display: none;
-    padding: 6px;
-    border: 0;
-    color: white;
-    background: transparent;
-    cursor: pointer;
+  display: none;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
 }
 
-@media (max-width: 1050px) {
-    .sustainability-message {
-    display: none;
-    }
+.menu-button:focus-visible {
+  outline: 2px solid var(--lima);
+  outline-offset: 2px;
 }
 
-@media (max-width: 800px) {
-    .header-container {
-    min-height: 68px;
-    }
+/* ---------- Celular y tableta: menú desplegable ---------- */
+@media (max-width: 900px) {
+  .menu-button {
+    display: grid;
+  }
 
-    .menu-button {
-    display: flex;
-    }
+  .brand-logo {
+    width: 160px;
+    height: 42px;
+  }
 
-    .navigation {
+  .navigation {
     position: absolute;
-    top: 68px;
+    top: var(--alto-header);
     right: 0;
     left: 0;
     display: none;
-    height: auto;
-    min-height: auto;
-    padding: 20px;
+    padding: 12px 20px 28px;
     flex-direction: column;
-    gap: 18px;
-    background-color: #183c24;
-    }
+    align-items: stretch;
+    gap: 4px;
+    background-color: rgba(20, 32, 20, 0.97);
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.25);
+  }
 
-    .navigation-open {
+  .site-header--abierto .navigation {
     display: flex;
-    }
+  }
 
-    .navigation a {
-    padding: 4px 0;
-    }
+  .navigation a {
+    padding: 14px 16px;
+    font-size: 17px;
+  }
 
-    .navigation a.active::after {
-    display: none;
-    }
+  .navigation .navigation__contacto {
+    margin: 12px 0 0;
+    text-align: center;
+  }
 }

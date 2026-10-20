@@ -1,20 +1,32 @@
-/* Colores de marca: úsalos con var(--nombre) en lugar del código hexadecimal. */
+/* Colores, medidas y tipografías de marca: úsalos con var(--nombre). */
 :root {
+  --noche: #142014;
   --verde-oscuro: #324824;
   --verde: #477b38;
   --verde-claro: #8caf4a;
+  --lima: #c6e27f;
+  --hoja: #e8eedc;
   --morado: #70517d;
-  --texto: #253229;
-  --texto-suave: #5e625b;
-  --fondo: #faf9f5;
-  --fondo-tarjeta: #fffdfa;
-  --borde: #ddd9ce;
+  --morado-claro: #f1ebf4;
+  --texto: #1d2619;
+  --texto-suave: #5b6157;
+  --fondo: #f7f6f1;
+  --fondo-tarjeta: #ffffff;
+  --borde: #e2e0d6;
 
-  font-family: Arial, Helvetica, sans-serif;
+  --ancho: min(1320px, calc(100% - 48px));
+  --alto-header: 76px;
+  --radio: 22px;
+
+  --fuente-titulos: 'Bricolage Grotesque', 'Figtree', Arial, sans-serif;
+  --fuente-texto: 'Figtree', Arial, Helvetica, sans-serif;
+
+  font-family: var(--fuente-texto);
   color: var(--texto);
   background-color: var(--fondo);
   line-height: 1.5;
   font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {
@@ -41,6 +53,18 @@ main {
   flex: 1;
 }
 
+/* El contenido recibe el foco al cambiar de sección (accesibilidad), sin mostrar un recuadro. */
+main:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--fuente-titulos);
+  letter-spacing: -0.015em;
+}
+
 button,
 a {
   font: inherit;
@@ -50,13 +74,109 @@ img {
   max-width: 100%;
 }
 
+/* Texto solo para lectores de pantalla. */
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Fundido al cambiar de sección */
+.pagina {
+  animation: aparecer 0.4s ease both;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---------- Botones (enlaces con forma de botón) ---------- */
+.boton {
+  display: inline-flex;
+  min-height: 52px;
+  padding: 0 26px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: white;
+  background-color: var(--verde);
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.boton:hover {
+  background-color: var(--verde-oscuro);
+}
+
+.boton:focus-visible {
+  outline: 3px solid var(--lima);
+  outline-offset: 3px;
+}
+
+/* Botón principal sobre fotos o fondos oscuros. */
+.boton--lima {
+  color: var(--noche);
+  background-color: var(--lima);
+}
+
+.boton--lima:hover {
+  color: var(--noche);
+  background-color: white;
+}
+
+/* Botón secundario translúcido sobre fotos. */
+.boton--vidrio {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: white;
+  background-color: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.boton--vidrio:hover {
+  border-color: white;
+  background-color: rgba(255, 255, 255, 0.24);
+}
+
+/* Botón con borde sobre fondo claro. */
+.boton--borde {
+  border-color: var(--verde);
+  color: var(--verde);
+  background-color: transparent;
+}
+
+.boton--borde:hover {
+  color: white;
+  background-color: var(--verde);
+}
+
+@media (max-width: 650px) {
+  :root {
+    --ancho: calc(100% - 40px);
+    --alto-header: 68px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-}
 
-/* El contenido recibe el foco al cambiar de sección (accesibilidad), sin mostrar un recuadro. */
-main:focus {
-  outline: none;
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
