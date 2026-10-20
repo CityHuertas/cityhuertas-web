@@ -1,16 +1,50 @@
-# React + Vite
+# CityHuertas — sitio web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Prototipo web informativo de CityHuertas: explica qué es la agroecología y presenta la ficha interactiva de la **Mizuna morada** de Finca Micaela.
 
-Currently, two official plugins are available:
+Sitio publicado: https://cityhuertas.github.io/cityhuertas-web/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Cómo ejecutarlo
 
-## React Compiler
+Requiere Node.js 22 o superior.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev      # servidor local en http://localhost:5173/cityhuertas-web/
+npm run lint     # revisar el código
+npm run build    # compilar la versión de producción en dist/
+```
 
-## Expanding the ESLint configuration
+Cada cambio que llega a `main` se publica automáticamente en GitHub Pages (`.github/workflows/deploy.yml`).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Estructura
+
+```
+src/
+  components/layout/   Header y Footer
+  pages/               Páginas completas (Inicio, Plantas, sección pendiente)
+  sections/            Bloques de contenido (Agroecología, ficha de Mizuna…)
+  data/                Contenido: navegación y etapas de la Mizuna
+  hooks/useRuta.js     Navegación por URL (#/plantas, #/contacto…)
+  index.css            Estilos globales y colores de marca (variables CSS)
+public/imagenes/       Fotografías (en formato WebP)
+```
+
+### Agregar una sección al menú
+
+1. Añádela en `src/data/navegacion.js`.
+2. Muéstrala en `src/App.jsx` (o déjala en `seccionesPendientes` mientras se construye).
+
+### Colores
+
+Usa las variables definidas en `src/index.css` en lugar de códigos hexadecimales:
+`var(--verde-oscuro)`, `var(--verde)`, `var(--morado)`, `var(--fondo)`, etc.
+
+### Imágenes
+
+Sube las fotos en **WebP**, de unos 900–1000 px de ancho (pesan ~10 veces menos que un PNG).
+
+## Forma de trabajo
+
+- No trabajar directamente sobre `main`.
+- Una rama por tarea (`feature/…`, `fix/…`) y Pull Request revisado por otro integrante.

@@ -1,16 +1,19 @@
-import { Lightbulb, Salad } from 'lucide-react'
+import { Lightbulb } from 'lucide-react'
 import './DatoCuriosoMizuna.css'
 
 function DatoCuriosoMizuna() {
   return (
-    <section className="dato-curioso" id="dato-curioso">
+    <aside className="dato-curioso" aria-labelledby="titulo-dato">
       <div className="dato-curioso__contenedor">
-        <div className="dato-curioso__icono-principal">
-          <Lightbulb size={32} strokeWidth={2} aria-hidden="true" />
-        </div>
+        <Lightbulb
+          className="dato-curioso__icono"
+          size={28}
+          strokeWidth={1.8}
+          aria-hidden="true"
+        />
 
-        <div className="dato-curioso__contenido">
-          <h2>¿Sabías que?</h2>
+        <div>
+          <h2 id="titulo-dato">¿Sabías que?</h2>
 
           <p>
             El sabor, el color y la textura de la Mizuna morada cambian según
@@ -20,12 +23,8 @@ function DatoCuriosoMizuna() {
             y su textura crujiente.
           </p>
         </div>
-
-        <div className="dato-curioso__imagen-pendiente">
-          <Salad size={72} strokeWidth={1.2} aria-hidden="true" />
-        </div>
       </div>
-    </section>
+    </aside>
   )
 }
 

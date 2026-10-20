@@ -1,0 +1,79 @@
+.site-footer {
+  color: rgba(255, 255, 255, 0.78);
+  background-color: var(--noche);
+}
+
+.footer-container {
+  width: var(--ancho);
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 72px) 0 36px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer-marca {
+  max-width: 400px;
+}
+
+.footer-marca img {
+  display: block;
+  width: 200px;
+  height: auto;
+}
+
+.footer-marca p {
+  margin: 18px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.footer-navegacion {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 12px 48px;
+}
+
+.footer-navegacion a,
+.footer-creditos a {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-navegacion a:hover,
+.footer-creditos a:hover {
+  color: var(--lima);
+  text-decoration: underline;
+}
+
+.footer-navegacion a:focus-visible,
+.footer-creditos a:focus-visible {
+  outline: 2px solid var(--lima);
+  outline-offset: 3px;
+}
+
+.footer-creditos {
+  width: var(--ancho);
+  margin: 0 auto;
+  padding: 20px 0 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+}
+
+.footer-creditos p {
+  margin: 0;
+}
+
+@media (max-width: 650px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 32px;
+  }
+}

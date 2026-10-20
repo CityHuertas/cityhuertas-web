@@ -2,7 +2,7 @@ const rutaImagenes = `${import.meta.env.BASE_URL}imagenes/mizuna`
 const etapasMizuna = [
   {
     nombre: 'Aparición espontánea',
-    imagen: `${rutaImagenes}/inicio-ciclo.png`,
+    imagen: `${rutaImagenes}/inicio-ciclo.webp`,
     subtitulo: 'Inicio del ciclo',
     descripcion:
       'Las primeras hojas aparecen de forma espontánea y presentan una textura más tierna.',
@@ -15,7 +15,7 @@ const etapasMizuna = [
   },
   {
     nombre: 'Cultivo inicial',
-    imagen: `${rutaImagenes}/cultivo-inicial.png`,
+    imagen: `${rutaImagenes}/cultivo-inicial.webp`,
     subtitulo: 'Crecimiento',
     descripcion:
       'La planta gana tamaño y el color morado se hace más evidente mientras conserva hojas tiernas.',
@@ -28,7 +28,7 @@ const etapasMizuna = [
   },
   {
     nombre: 'Desarrollo',
-    imagen: `${rutaImagenes}/desarrollo.png`,
+    imagen: `${rutaImagenes}/desarrollo.webp`,
     subtitulo: 'Primeras flores',
     descripcion:
       'Con la madurez aumenta la intensidad del sabor y comienzan a aparecer las primeras flores.',
@@ -41,7 +41,7 @@ const etapasMizuna = [
   },
   {
     nombre: 'Planta florida',
-    imagen: `${rutaImagenes}/planta-florida.png`,
+    imagen: `${rutaImagenes}/planta-florida.webp`,
     subtitulo: 'Floración',
     descripcion:
       'La planta florida expresa su perfil más intenso, con notas picantes y mayor astringencia.',
