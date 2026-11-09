@@ -1,7 +1,8 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
-import logoCityHuertas from '../../assets/images/cityhuertas.png'
+// Versión recortada del logo blanco (sin márgenes vacíos).
+import logoCityHuertas from '../../assets/images/cityhuertas-isotipo-blanco.png'
 import navegacion from '../../data/navegacion'
 import { enlaceA } from '../../hooks/useRuta'
 import './Header.css'
@@ -13,7 +14,7 @@ function Header({ rutaActual }) {
   const [menuAbierto, setMenuAbierto] = useState(false)
   const [conScroll, setConScroll] = useState(false)
 
-  // Transparente sobre la foto de portada; sólido al bajar.
+  // Al bajar por la página, el menú muestra una sombra.
   useEffect(() => {
     const revisar = () => setConScroll(window.scrollY > 24)
 
@@ -38,7 +39,7 @@ function Header({ rutaActual }) {
 
   const clases = [
     'site-header',
-    (conScroll || menuAbierto) && 'site-header--solido',
+    (conScroll || menuAbierto) && 'site-header--sombra',
     menuAbierto && 'site-header--abierto',
   ]
     .filter(Boolean)

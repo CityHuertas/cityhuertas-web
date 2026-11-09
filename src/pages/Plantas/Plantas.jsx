@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import Portada from '../../components/Portada/Portada'
-import fotos from '../../data/fotos'
 import FichaMizuna from '../../sections/FichaMizuna/FichaMizuna'
+import CienciaMizuna from '../../sections/CienciaMizuna/CienciaMizuna'
 import DatoCuriosoMizuna from '../../sections/DatoCuriosoMizuna/DatoCuriosoMizuna'
 import LlamadoRestaurantes from '../../sections/LlamadoRestaurantes/LlamadoRestaurantes'
 import etapasMizuna from '../../data/etapasMizuna'
@@ -21,7 +21,6 @@ function Plantas() {
   return (
     <>
       <Portada
-        foto={fotos.acelga}
         idTitulo="titulo-plantas"
         titulo="Plantas"
         descripcion="Fichas interactivas de lo que se cultiva en la finca: cómo cambian su color, su sabor y su textura mientras crecen. Empezamos con la Mizuna morada."
@@ -33,6 +32,7 @@ function Plantas() {
         alCambiarEtapa={setIndiceEtapa}
       />
 
+      <CienciaMizuna />
       <DatoCuriosoMizuna />
       <LlamadoRestaurantes etapa={etapasMizuna[indiceEtapa]} />
     </>

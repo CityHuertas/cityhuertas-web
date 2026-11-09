@@ -125,7 +125,7 @@ img {
   outline-offset: 3px;
 }
 
-/* Botón principal sobre fotos o fondos oscuros. */
+/* Botón principal sobre fondos oscuros (por ejemplo, la trivia). */
 .boton--lima {
   color: var(--noche);
   background-color: var(--lima);
@@ -136,7 +136,7 @@ img {
   background-color: white;
 }
 
-/* Botón secundario translúcido sobre fotos. */
+/* Botón secundario translúcido sobre fondos oscuros. */
 .boton--vidrio {
   border-color: rgba(255, 255, 255, 0.45);
   color: white;

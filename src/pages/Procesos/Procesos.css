@@ -1,0 +1,161 @@
+.procesos {
+  width: var(--ancho);
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 88px) 0 clamp(56px, 8vw, 104px);
+}
+
+/* Línea de tiempo vertical: un círculo numerado por fase, unidos por una línea. */
+.linea-tiempo {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fase {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 20px;
+  padding-bottom: 22px;
+}
+
+.fase:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 56px;
+  bottom: 0;
+  left: 27px;
+  width: 2px;
+  background-color: var(--borde);
+}
+
+.fase__marcador {
+  display: flex;
+  justify-content: center;
+}
+
+.fase__numero {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border-radius: 50%;
+  color: white;
+  background-color: var(--verde-oscuro);
+  font-family: var(--fuente-titulos);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.fase:last-child .fase__numero {
+  background-color: var(--morado);
+}
+
+.fase__tarjeta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 20px 36px;
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background-color: var(--fondo-tarjeta);
+}
+
+.fase__encabezado {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.fase__icono {
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: var(--verde);
+}
+
+.fase__tarjeta h2 {
+  margin: 0;
+  color: var(--verde-oscuro);
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.1;
+}
+
+.fase__resumen {
+  margin: 8px 0 0;
+  color: var(--texto-suave);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.fase__actividades {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fase__actividades li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--texto);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.fase__actividades li::before {
+  content: '';
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--verde-claro);
+}
+
+.procesos__cierre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+  margin-top: 20px;
+  padding: 22px 26px;
+  border-radius: var(--radio);
+  background-color: var(--hoja);
+}
+
+.procesos__cierre p {
+  margin: 0;
+  color: var(--verde-oscuro);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .fase__tarjeta {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .fase {
+    grid-template-columns: 40px 1fr;
+    gap: 12px;
+  }
+
+  .fase__numero {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .fase:not(:last-child)::before {
+    top: 40px;
+    left: 19px;
+  }
+
+  .procesos__cierre .boton {
+    flex: 1 1 100%;
+  }
+}

@@ -1,0 +1,166 @@
+.principios {
+  scroll-margin-top: calc(var(--alto-header) + 16px);
+  width: var(--ancho);
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 48px) 0 clamp(56px, 8vw, 104px);
+}
+
+.principios__encabezado h2 {
+  margin: 0;
+  color: var(--verde-oscuro);
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 1.05;
+}
+
+.principios__encabezado p {
+  max-width: 44em;
+  margin: 14px 0 28px;
+  color: var(--texto-suave);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* Columnas libres: al abrir un principio no quedan huecos al lado.
+   Se leen de arriba abajo: 01–05 a la izquierda y 06–10 a la derecha. */
+.principios__lista {
+  columns: 2;
+  column-gap: 14px;
+}
+
+.principio {
+  margin-bottom: 14px;
+  break-inside: avoid;
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+  background-color: var(--fondo-tarjeta);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.principio[open] {
+  border-color: var(--verde-claro);
+  box-shadow: 0 8px 24px rgba(50, 72, 36, 0.08);
+}
+
+.principio summary {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: start;
+  padding: 20px 22px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.principio summary::-webkit-details-marker {
+  display: none;
+}
+
+.principio summary:focus-visible {
+  outline: 3px solid var(--verde);
+  outline-offset: 2px;
+  border-radius: 18px;
+}
+
+.principio__numero {
+  color: var(--morado);
+  font-family: var(--fuente-titulos);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.principio__textos {
+  display: grid;
+  gap: 4px;
+}
+
+.principio__fao {
+  color: var(--texto-suave);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.principio__titulo {
+  color: var(--verde-oscuro);
+  font-family: var(--fuente-titulos);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.principio__frase {
+  margin-top: 4px;
+  color: var(--texto);
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Signo + / − */
+.principio__icono {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--hoja);
+}
+
+.principio__icono::before,
+.principio__icono::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--verde-oscuro);
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease;
+}
+
+.principio__icono::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.principio[open] .principio__icono::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+@media (hover: hover) {
+  .principio summary:hover .principio__titulo {
+    color: var(--morado);
+  }
+}
+
+.principio__detalle {
+  margin: 0;
+  padding: 0 22px 22px 66px;
+  color: var(--texto-suave);
+  font-size: 16px;
+  line-height: 1.6;
+  animation: aparecer 0.25s ease both;
+}
+
+@media (max-width: 900px) {
+  .principios__lista {
+    columns: 1;
+  }
+}
+
+@media (max-width: 500px) {
+  .principio summary {
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .principio__numero {
+    font-size: 22px;
+  }
+
+  .principio__detalle {
+    padding: 0 18px 20px;
+  }
+}

@@ -29,6 +29,23 @@
   line-height: 1.55;
 }
 
+.ficha__encabezado .ficha__cosecha {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  gap: 8px;
+  max-width: none;
+  margin-top: 4px;
+  color: var(--verde-oscuro);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ficha__cosecha svg {
+  flex-shrink: 0;
+  color: var(--verde);
+}
+
 /* ---------- Selector de etapas (línea de crecimiento) ---------- */
 .ficha__etapas {
   position: relative;
@@ -303,6 +320,35 @@
   100% {
     background-color: transparent;
   }
+}
+
+/* ---------- Qué pasa por dentro ---------- */
+.ficha__por-dentro {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background-color: var(--morado-claro);
+}
+
+.ficha__por-dentro--nuevo {
+  animation: aparecer 0.5s ease both;
+}
+
+.ficha__por-dentro p {
+  margin: 0;
+  color: var(--texto);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.ficha__por-dentro .ficha__por-dentro-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  color: var(--morado);
+  font-size: 14px;
+  font-weight: 800;
 }
 
 /* ---------- Intensidad del sabor ---------- */

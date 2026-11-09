@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import {
+  CalendarDays,
   ChevronLeft,
+  Microscope,
   ChevronRight,
   Hand,
   Palette,
@@ -75,6 +77,12 @@ function FichaMizuna({ etapas, indiceEtapa, alCambiarEtapa }) {
         <p>
           Una hoja de Finca Micaela con un sabor parecido al de la rúgula, que
           cambia mucho mientras crece. Recorre sus cuatro etapas.
+        </p>
+
+        <p className="ficha__cosecha">
+          <CalendarDays size={18} aria-hidden="true" />
+          CityHuertas la cosecha entre la semana 4 y 5 desde que se siembra la
+          plántula (unas 7 a 9 semanas desde la semilla).
         </p>
       </header>
 
@@ -193,8 +201,19 @@ function FichaMizuna({ etapas, indiceEtapa, alCambiarEtapa }) {
             ))}
           </dl>
 
+          {/* Lo que explican los estudios científicos en esta etapa. */}
+          <div
+            key={`por-dentro-${indiceEtapa}`}
+            className={`ficha__por-dentro ${huboCambio ? 'ficha__por-dentro--nuevo' : ''}`}
+          >
+            <p className="ficha__por-dentro-titulo">
+              <Microscope size={18} aria-hidden="true" /> Qué pasa por dentro
+            </p>
+            <p>{etapa.porDentro}</p>
+          </div>
+
           <div className="intensidad">
-            <p id="titulo-intensidad">Intensidad del sabor</p>
+            <p id="titulo-intensidad">Intensidad del sabor según Finca Micaela</p>
 
             <div
               className="intensidad__barra"

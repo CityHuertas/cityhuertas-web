@@ -8,7 +8,8 @@
  *  - correcta: la posición de la respuesta correcta (0, 1, 2 o 3)
  *  - explicacion: se muestra después de responder
  *
- * Todas salen del contenido del sitio (FAO y entrevista a Finca Micaela).
+ * Todas salen del contenido del sitio (FAO, entrevista a Finca Micaela y
+ * las referencias de src/data/cienciaMizuna.js).
  * Antes de publicar preguntas nuevas, validen la información con la finca.
  */
 
@@ -132,6 +133,37 @@ const preguntasTrivia = [
     correcta: 1,
     explicacion:
       'Las hojas jóvenes son tiernas y suaves; otros prefieren plantas más maduras por su sabor intenso y su textura crujiente.',
+  },
+  {
+    pregunta: '¿Por qué la Mizuna pica cuando la masticas?',
+    opciones: [
+      'Porque tiene ají por dentro',
+      'Porque al masticar se mezclan sus glucosinolatos con una enzima y forman compuestos picantes',
+      'Porque está muy fría',
+      'Porque absorbe el picor del suelo',
+    ],
+    correcta: 1,
+    explicacion:
+      'La hoja guarda glucosinolatos y la enzima mirosinasa por separado. Al masticar se mezclan y forman isotiocianatos, el mismo tipo de picor de la mostaza y el wasabi.',
+  },
+  {
+    pregunta: '¿Qué parte de la planta concentra más glucosinolatos, sus defensas naturales?',
+    opciones: ['Las hojas viejas', 'Las raíces', 'Las semillas', 'Los tallos'],
+    correcta: 2,
+    explicacion:
+      'En plantas de la misma especie de la Mizuna, el orden va de semillas y flores a hojas jóvenes, tallos, raíces y, por último, hojas viejas.',
+  },
+  {
+    pregunta: 'Una hoja de Mizuna con menos glucosinolatos, ¿es siempre menos amarga?',
+    opciones: [
+      'Sí, siempre',
+      'No: el amargor también depende de aminoácidos, azúcares y ácidos',
+      'Sí, pero solo si es roja',
+      'No, porque los glucosinolatos no tienen sabor',
+    ],
+    correcta: 1,
+    explicacion:
+      'El amargor es un balance: algunos compuestos lo aumentan (como el ácido málico) y otros lo suavizan (como la glutamina, la asparagina y los azúcares).',
   },
 ]
 

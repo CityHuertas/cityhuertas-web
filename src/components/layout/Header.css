@@ -1,21 +1,15 @@
-/* Fijo arriba: transparente sobre la portada y sólido al bajar. */
+/* Menú verde fijo arriba al bajar por la página. */
 .site-header {
-  position: fixed;
+  position: sticky;
   top: 0;
-  right: 0;
-  left: 0;
   z-index: 20;
   color: white;
-  background-color: transparent;
-  transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease;
+  background-color: var(--verde-oscuro);
+  transition: box-shadow 0.3s ease;
 }
 
-.site-header--solido {
-  background-color: rgba(20, 32, 20, 0.92);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(12px);
+.site-header--sombra {
+  box-shadow: 0 6px 20px rgba(20, 32, 20, 0.22);
 }
 
 .header-container {
@@ -42,10 +36,8 @@
 
 .brand-logo {
   display: block;
-  width: 190px;
-  height: 48px;
-  object-fit: contain;
-  object-position: left center;
+  width: auto;
+  height: 40px;
 }
 
 .navigation {
@@ -119,8 +111,7 @@
   }
 
   .brand-logo {
-    width: 160px;
-    height: 42px;
+    height: 34px;
   }
 
   .navigation {
@@ -133,7 +124,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: 4px;
-    background-color: rgba(20, 32, 20, 0.97);
+    background-color: var(--verde-oscuro);
     box-shadow: 0 18px 30px rgba(0, 0, 0, 0.25);
   }
 
