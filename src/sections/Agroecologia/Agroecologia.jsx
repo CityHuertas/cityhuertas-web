@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 
 import Portada from '../../components/Portada/Portada'
-import fotos from '../../data/fotos'
+import PrincipiosCH from '../PrincipiosCH/PrincipiosCH'
 import './Agroecologia.css'
 
 const dimensiones = [
@@ -50,7 +50,6 @@ function Agroecologia() {
   return (
     <>
       <Portada
-        foto={fotos.sembrando}
         idTitulo="titulo-agroecologia"
         antetitulo="Una forma de cuidar la vida"
         titulo="¿Qué es la agroecología?"
@@ -173,6 +172,8 @@ function Agroecologia() {
           </footer>
         </div>
       </section>
+
+      <PrincipiosCH />
     </>
   )
 }

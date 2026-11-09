@@ -1,3 +1,9 @@
+/*
+ * Etapas de la Mizuna morada.
+ * - color, forma, sabor, textura y perfil: observaciones de Finca Micaela.
+ * - porDentro: lo que explican los estudios científicos (ver
+ *   src/data/cienciaMizuna.js para las referencias).
+ */
 const rutaImagenes = `${import.meta.env.BASE_URL}imagenes/mizuna`
 const etapasMizuna = [
   {
@@ -12,6 +18,8 @@ const etapasMizuna = [
     textura: 'Tierna y delicada',
     perfil: 'Fresco, similar a la rúgula',
     estado: 'Inicio del ciclo',
+    porDentro:
+      'Las hojas jóvenes guardan más defensas naturales (glucosinolatos) que las hojas viejas y, con ellas, más potencial picante.',
   },
   {
     nombre: 'Cultivo inicial',
@@ -25,6 +33,8 @@ const etapasMizuna = [
     textura: 'Tierna, con más cuerpo',
     perfil: 'Aromático y vegetal',
     estado: 'Crecimiento',
+    porDentro:
+      'Con cada hoja nueva el aroma se vuelve más complejo: aumentan compuestos de olor verde, fresco y cítrico.',
   },
   {
     nombre: 'Desarrollo',
@@ -38,6 +48,8 @@ const etapasMizuna = [
     textura: 'Firme y crujiente',
     perfil: 'Intenso y persistente',
     estado: 'Primeras flores',
+    porDentro:
+      'Las hojas más viejas tienen menos glucosinolatos, pero eso no las hace menos amargas: el amargor también depende de aminoácidos, azúcares y ácidos.',
   },
   {
     nombre: 'Planta florida',
@@ -51,6 +63,8 @@ const etapasMizuna = [
     textura: 'Más firme',
     perfil: 'Marcado y complejo',
     estado: 'Floración',
+    porDentro:
+      'La planta concentra sus defensas en flores y semillas, que tienen más glucosinolatos que las hojas.',
   },
 ]
 export default etapasMizuna

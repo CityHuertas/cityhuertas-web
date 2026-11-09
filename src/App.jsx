@@ -4,32 +4,24 @@ import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Inicio from './pages/Inicio/Inicio'
 import Plantas from './pages/Plantas/Plantas'
+import Procesos from './pages/Procesos/Procesos'
 import Recursos from './pages/Recursos/Recursos'
 import SeccionPendiente from './pages/SeccionPendiente/SeccionPendiente'
 import Agroecologia from './sections/Agroecologia/Agroecologia'
 import navegacion from './data/navegacion'
-import fotos from './data/fotos'
 import { useRuta } from './hooks/useRuta'
 
 const seccionesPendientes = {
-  procesos: {
-    titulo: 'Procesos',
-    descripcion:
-      'Aquí podrás conocer los procesos utilizados en la producción agroecológica.',
-    foto: fotos.riego,
-  },
   contacto: {
     titulo: 'Contacto',
     descripcion:
       'Esta sección permitirá comunicarse con CityHuertas y solicitar información.',
-    foto: fotos.plantulas,
   },
 }
 
 const paginaNoEncontrada = {
   titulo: 'Página no encontrada',
   descripcion: 'La dirección que buscas no existe o cambió de lugar.',
-  foto: fotos.huerta,
   noEncontrada: true,
 }
 
@@ -64,6 +56,8 @@ function App() {
     pagina = <Agroecologia />
   } else if (ruta === 'plantas') {
     pagina = <Plantas />
+  } else if (ruta === 'procesos') {
+    pagina = <Procesos />
   } else if (ruta === 'recursos') {
     pagina = <Recursos />
   } else {
