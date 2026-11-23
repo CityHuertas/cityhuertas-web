@@ -13,14 +13,11 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
+  # 1. Compila el sitio y lo sube como artefacto "github-pages".
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -47,6 +44,16 @@ jobs:
         with:
           path: ./dist
 
+  # 2. Publica el artefacto en un trabajo aparte, como recomienda GitHub.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Publicar aplicación
         id: deployment
         uses: actions/deploy-pages@v4
