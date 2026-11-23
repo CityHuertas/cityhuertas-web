@@ -1,0 +1,179 @@
+.contacto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: clamp(24px, 4vw, 56px);
+  width: var(--ancho);
+  margin: 0 auto;
+  padding: clamp(32px, 5vw, 64px) 0 clamp(56px, 8vw, 104px);
+}
+
+.contacto__lado h2 {
+  margin: 0 0 16px;
+  color: var(--verde-oscuro);
+  font-size: 24px;
+}
+
+.contacto__lado ol {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contacto__lado li {
+  display: flex;
+  gap: 12px;
+  color: var(--texto-suave);
+  line-height: 1.5;
+}
+
+.contacto__lado svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--verde);
+}
+
+.contacto__formulario,
+.contacto__gracias {
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background-color: var(--fondo-tarjeta);
+}
+
+.contacto__formulario {
+  display: grid;
+  gap: 18px;
+}
+
+.contacto__fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.contacto__campo {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.contacto__campo label {
+  color: var(--texto);
+  font-weight: 600;
+}
+
+.contacto__ayuda {
+  margin: -2px 0 2px;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.contacto__campo input,
+.contacto__campo select,
+.contacto__campo textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  background-color: #fff;
+  color: var(--texto);
+  font: inherit;
+}
+
+.contacto__campo textarea {
+  resize: vertical;
+}
+
+.contacto__campo input:focus,
+.contacto__campo select:focus,
+.contacto__campo textarea:focus {
+  border-color: var(--verde);
+  outline: 3px solid var(--lima);
+  outline-offset: 1px;
+}
+
+.contacto__campo [aria-invalid='true'] {
+  border-color: #b42318;
+}
+
+.contacto__error {
+  margin: 0;
+  color: #b42318;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.contacto__autorizacion {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+
+.contacto__autorizacion input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--verde);
+}
+
+.contacto__politica summary {
+  color: var(--verde-oscuro);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.contacto__politica p {
+  margin: 8px 0 0;
+  color: var(--texto-suave);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.contacto__formulario .boton {
+  justify-self: start;
+}
+
+/* Invisible para las personas, pero no con display:none (algunos robots lo ignoran). */
+.contacto__trampa {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contacto__gracias {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+}
+
+.contacto__gracias svg {
+  color: var(--verde);
+}
+
+.contacto__gracias h2 {
+  margin: 0;
+  color: var(--verde-oscuro);
+}
+
+.contacto__gracias p {
+  margin: 0 0 8px;
+  color: var(--texto-suave);
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  .contacto {
+    grid-template-columns: 1fr;
+  }
+
+  .contacto__fila {
+    grid-template-columns: 1fr;
+  }
+}

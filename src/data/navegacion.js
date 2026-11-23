@@ -5,7 +5,7 @@ const navegacion = [
   { id: 'plantas', nombre: 'Plantas', titulo: 'Plantas' },
   { id: 'procesos', nombre: 'Procesos', titulo: 'Procesos' },
   { id: 'recursos', nombre: 'Recursos', titulo: 'Recursos y trivia' },
-  { id: 'contacto', nombre: 'Contacto', titulo: 'Contacto' },
+  { id: 'contacto', nombre: 'Contáctanos', titulo: 'Contáctanos' },
 ]
 
 export default navegacion

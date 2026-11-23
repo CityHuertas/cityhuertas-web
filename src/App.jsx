@@ -9,16 +9,12 @@ import Recursos from './pages/Recursos/Recursos'
 import RevisarContenido from './pages/RevisarContenido/RevisarContenido'
 import SeccionPendiente from './pages/SeccionPendiente/SeccionPendiente'
 import Agroecologia from './sections/Agroecologia/Agroecologia'
+import Contacto from './pages/Contacto/Contacto'
 import navegacion from './data/navegacion'
 import { useRuta } from './hooks/useRuta'
 
-const seccionesPendientes = {
-  contacto: {
-    titulo: 'Contacto',
-    descripcion:
-      'Esta sección permitirá comunicarse con CityHuertas y solicitar información.',
-  },
-}
+// Secciones del menú que todavía no tienen página propia.
+const seccionesPendientes = {}
 
 const paginaNoEncontrada = {
   titulo: 'Página no encontrada',
@@ -62,6 +58,8 @@ function App() {
     pagina = <Procesos />
   } else if (ruta === 'recursos') {
     pagina = <Recursos />
+  } else if (ruta === 'contacto') {
+    pagina = <Contacto />
   } else if (ruta === 'revisar-contenido') {
     // Página sin enlace en el menú: muestra a la empresa los errores de la hoja.
     pagina = <RevisarContenido />

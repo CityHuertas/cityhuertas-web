@@ -3,7 +3,10 @@ import { ChefHat } from 'lucide-react'
 import { enlaceA } from '../../hooks/useRuta'
 import './LlamadoRestaurantes.css'
 
-function LlamadoRestaurantes({ etapa }) {
+// El botón lleva al formulario con la planta y la etapa ya escritas.
+function LlamadoRestaurantes({ producto, etapa }) {
+  const consulta = new URLSearchParams({ producto: producto.id, etapa: etapa.nombre })
+
   return (
     <section className="llamado-restaurantes" aria-labelledby="titulo-llamado">
       <div className="llamado-restaurantes__panel">
@@ -29,7 +32,7 @@ function LlamadoRestaurantes({ etapa }) {
 
         <a
           className="llamado-restaurantes__boton"
-          href={enlaceA('contacto')}
+          href={`${enlaceA('contacto')}?${consulta}`}
         >
           Solicitar información
         </a>
