@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Check, Flame, RotateCcw, Timer, Trophy, X } from 'lucide-react'
 
-import preguntasTrivia from '../../data/preguntasTrivia'
+import { useContenido } from '../../hooks/useContenido'
 import {
   PREGUNTAS_POR_PARTIDA,
   PUNTOS_ACIERTO,
@@ -26,8 +26,9 @@ function mezclar(lista) {
 }
 
 // Elige las preguntas de la partida y mezcla también el orden de las opciones.
-function prepararPartida() {
-  return mezclar(preguntasTrivia)
+// El banco viene de la hoja de Google (o del respaldo en el código).
+function prepararPartida(banco) {
+  return mezclar(banco)
     .slice(0, PREGUNTAS_POR_PARTIDA)
     .map((item) => {
       const opciones = mezclar(item.opciones.map((texto, indice) => ({ texto, indice })))
@@ -40,6 +41,9 @@ function prepararPartida() {
 }
 
 function Trivia() {
+  const { listo, preguntas: banco } = useContenido()
+  const totalPartida = Math.min(PREGUNTAS_POR_PARTIDA, banco.length)
+
   const [fase, setFase] = useState('portada') // portada | jugando | final
   const [preguntas, setPreguntas] = useState([])
   const [indice, setIndice] = useState(0)
@@ -61,7 +65,7 @@ function Trivia() {
   const ultima = indice === preguntas.length - 1
 
   const empezar = () => {
-    setPreguntas(prepararPartida())
+    setPreguntas(prepararPartida(banco))
     setIndice(0)
     setRespuesta(null)
     setPuntaje(0)
@@ -152,7 +156,8 @@ function Trivia() {
         ? Number(tecla) - 1
         : LETRAS.indexOf(tecla)
 
-      if (opcion >= 0) responder(opcion)
+      // Hay preguntas con 2 o 3 opciones: se ignoran las teclas que sobran.
+      if (opcion >= 0 && opcion < pregunta.opciones.length) responder(opcion)
     }
 
     window.addEventListener('keydown', alPresionar)
@@ -176,7 +181,7 @@ function Trivia() {
             <h2 id="titulo-trivia">Trivia agroecológica</h2>
             <p>
               ¿Cuánto sabes de agroecología y de las plantas de la finca?
-              Responde {PREGUNTAS_POR_PARTIDA} preguntas y entra a la tabla de
+              Responde {totalPartida} preguntas y entra a la tabla de
               posiciones.
             </p>
 
@@ -195,8 +200,13 @@ function Trivia() {
               </li>
             </ul>
 
-            <button className="boton boton--lima" type="button" onClick={empezar}>
-              Empezar a jugar
+            <button
+              className="boton boton--lima"
+              type="button"
+              onClick={empezar}
+              disabled={!listo}
+            >
+              {listo ? 'Empezar a jugar' : 'Cargando preguntas…'}
             </button>
           </div>
         )}
@@ -250,7 +260,7 @@ function Trivia() {
 
                 return (
                   <button
-                    key={texto}
+                    key={`${indice}-${opcion}`}
                     type="button"
                     className={`trivia__opcion ${estado ? `trivia__opcion--${estado}` : ''}`}
                     onClick={() => responder(opcion)}

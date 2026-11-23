@@ -6,6 +6,7 @@ import Inicio from './pages/Inicio/Inicio'
 import Plantas from './pages/Plantas/Plantas'
 import Procesos from './pages/Procesos/Procesos'
 import Recursos from './pages/Recursos/Recursos'
+import RevisarContenido from './pages/RevisarContenido/RevisarContenido'
 import SeccionPendiente from './pages/SeccionPendiente/SeccionPendiente'
 import Agroecologia from './sections/Agroecologia/Agroecologia'
 import navegacion from './data/navegacion'
@@ -26,7 +27,8 @@ const paginaNoEncontrada = {
 }
 
 function App() {
-  const ruta = useRuta()
+  // La ruta puede tener partes: "plantas/mizuna-morada" → sección "plantas".
+  const [ruta, ...subruta] = useRuta().split('/')
   const contenidoRef = useRef(null)
   const primeraCarga = useRef(true)
 
@@ -55,11 +57,14 @@ function App() {
   } else if (ruta === 'agroecologia') {
     pagina = <Agroecologia />
   } else if (ruta === 'plantas') {
-    pagina = <Plantas />
+    pagina = <Plantas idProducto={subruta[0]} />
   } else if (ruta === 'procesos') {
     pagina = <Procesos />
   } else if (ruta === 'recursos') {
     pagina = <Recursos />
+  } else if (ruta === 'revisar-contenido') {
+    // Página sin enlace en el menú: muestra a la empresa los errores de la hoja.
+    pagina = <RevisarContenido />
   } else {
     pagina = (
       <SeccionPendiente

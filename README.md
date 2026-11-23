@@ -1,6 +1,6 @@
 # CityHuertas — sitio web
 
-Prototipo web informativo de CityHuertas: explica qué es la agroecología y presenta la ficha interactiva de la **Mizuna morada** de Finca Micaela.
+Prototipo web informativo de CityHuertas: explica qué es la agroecología y presenta las fichas interactivas de las plantas de la finca (empezando por la **Mizuna morada** de Finca Micaela) y una trivia; plantas y preguntas se editan desde Google Sheets.
 
 Sitio publicado: https://cityhuertas.github.io/cityhuertas-web/
 
@@ -22,10 +22,12 @@ Cada cambio que llega a `main` se publica automáticamente en GitHub Pages (`.gi
 ```
 src/
   components/layout/   Header y Footer
-  pages/               Páginas completas (Inicio, Plantas, sección pendiente)
-  sections/            Bloques de contenido (Agroecología, ficha de Mizuna…)
-  data/                Contenido: navegación y etapas de la Mizuna
-  hooks/useRuta.js     Navegación por URL (#/plantas, #/contacto…)
+  pages/               Páginas completas (Inicio, Plantas, Revisar contenido…)
+  sections/            Bloques de contenido (Agroecología, ficha de producto, trivia…)
+  data/                Contenido de respaldo: navegación, productos y preguntas
+  config/contenido.js  Enlaces a la hoja de Google con plantas y preguntas
+  servicios/           Lectura de la hoja (CSV) y ranking de la trivia
+  hooks/useRuta.js     Navegación por URL (#/plantas/mizuna-morada, #/contacto…)
   index.css            Estilos globales y colores de marca (variables CSS)
 public/imagenes/       Fotografías (en formato WebP)
 ```
@@ -43,6 +45,13 @@ Usa las variables definidas en `src/index.css` en lugar de códigos hexadecimale
 ### Imágenes
 
 Sube las fotos en **WebP**, de unos 900–1000 px de ancho (pesan ~10 veces menos que un PNG).
+
+## Contenido editable (plantas y trivia)
+
+Las plantas, sus etapas y las preguntas de la trivia se editan en Google Sheets, sin tocar código. Guía completa: [`docs/contenido-google-sheets.md`](docs/contenido-google-sheets.md).
+
+- Página oculta para revisar errores de la hoja: `#/revisar-contenido`.
+- Si la hoja no está conectada o falla, se usa el respaldo de `src/data/`.
 
 ## Forma de trabajo
 

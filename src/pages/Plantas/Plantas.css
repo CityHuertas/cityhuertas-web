@@ -1,0 +1,68 @@
+/* Selector de plantas: solo aparece cuando la hoja tiene más de un producto. */
+.plantas__selector {
+  width: min(100% - 2.5rem, var(--ancho));
+  margin: 2rem auto 0;
+}
+
+.plantas__selector ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plantas__selector a {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background-color: var(--fondo-tarjeta);
+  color: var(--texto);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.plantas__selector a:hover {
+  border-color: var(--verde);
+}
+
+.plantas__selector a[aria-current='page'] {
+  border-color: var(--verde-oscuro);
+  background-color: var(--verde-oscuro);
+  color: #fff;
+}
+
+.plantas__selector a:focus-visible {
+  outline: 3px solid var(--lima);
+  outline-offset: 2px;
+}
+
+.plantas__cargando {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 4rem auto;
+  color: var(--texto-suave);
+}
+
+.plantas__cargando svg {
+  animation: plantas-girar 1s linear infinite;
+}
+
+@keyframes plantas-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plantas__cargando svg {
+    animation: none;
+  }
+}
