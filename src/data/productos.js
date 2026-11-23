@@ -22,11 +22,11 @@ const productos = [
       'El sabor, el color y la textura de la Mizuna morada cambian según su etapa de crecimiento. Algunos restaurantes prefieren sus hojas jóvenes por ser más tiernas y suaves, mientras que otros buscan plantas más desarrolladas por su sabor intenso, sus notas picantes y su textura crujiente.',
     etapas: [
       {
-        nombre: 'Aparición espontánea',
+        nombre: 'Plántula',
         foto: 'mizuna/inicio-ciclo.webp',
         subtitulo: 'Inicio del ciclo',
         descripcion:
-          'Las primeras hojas aparecen de forma espontánea y presentan una textura más tierna.',
+          'El ciclo empieza al sembrar plántulas con al menos tres hojas; sus hojas jóvenes tienen una textura tierna.',
         color: 'Morado suave y verde',
         forma: 'Hojas jóvenes y dentadas',
         sabor: 'Suave, con amargor ligero',
@@ -67,13 +67,13 @@ const productos = [
           'Las hojas más viejas tienen menos glucosinolatos, pero eso no las hace menos amargas: el amargor también depende de aminoácidos, azúcares y ácidos.',
       },
       {
-        nombre: 'Planta florida',
+        nombre: 'En floración',
         foto: 'mizuna/planta-florida.webp',
         subtitulo: 'Floración',
         descripcion:
-          'La planta florida expresa su perfil más intenso, con notas picantes y mayor astringencia.',
+          'En floración, la planta expresa su perfil más intenso, con notas picantes y mayor astringencia.',
         color: 'Hojas moradas, flor verde-amarilla',
-        forma: 'Planta abierta y florida',
+        forma: 'Planta abierta y con flores',
         sabor: 'Picante y astringente',
         textura: 'Más firme',
         perfil: 'Marcado y complejo',

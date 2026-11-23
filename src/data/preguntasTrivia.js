@@ -106,9 +106,9 @@ const preguntasTrivia = [
   {
     pregunta: '¿En qué etapa la Mizuna morada tiene las hojas más tiernas y suaves?',
     opciones: [
-      'Aparición espontánea',
+      'Plántula',
       'Desarrollo',
-      'Planta florida',
+      'En floración',
       'Todas son iguales',
     ],
     correcta: 0,
