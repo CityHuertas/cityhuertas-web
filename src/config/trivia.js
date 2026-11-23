@@ -8,7 +8,8 @@
  *
  * Guía paso a paso: docs/trivia-google-sheets.md
  */
-export const URL_RANKING = ''
+export const URL_RANKING =
+  'https://script.google.com/macros/s/AKfycbw5uMDCSjV2vmX98EninB0KNlyomEypmoxC9K3aVftFxhvvehKISCTAoRrIStTmfz5c/exec'
 
 export const PREGUNTAS_POR_PARTIDA = 10
 export const SEGUNDOS_POR_PREGUNTA = 20
