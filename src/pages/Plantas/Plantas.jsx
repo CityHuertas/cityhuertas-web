@@ -40,7 +40,7 @@ function VistaProducto({ producto }) {
 
       {Extra && <Extra />}
       <DatoCurioso texto={producto.datoCurioso} />
-      <LlamadoRestaurantes etapa={producto.etapas[indiceEtapa]} />
+      <LlamadoRestaurantes producto={producto} etapa={producto.etapas[indiceEtapa]} />
     </>
   )
 }

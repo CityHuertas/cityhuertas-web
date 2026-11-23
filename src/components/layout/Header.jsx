@@ -80,7 +80,7 @@ function Header({ rutaActual }) {
             aria-current={rutaActual === 'contacto' ? 'page' : undefined}
             onClick={cerrarMenu}
           >
-            Contacto
+            Contáctanos
           </a>
         </nav>
 

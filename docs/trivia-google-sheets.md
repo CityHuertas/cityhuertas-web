@@ -1,6 +1,9 @@
-# Conectar la trivia con Google Sheets
+# Conectar la trivia y Contáctanos con Google Sheets
 
-La trivia guarda cada puntaje (apodo, nombre, contacto, puntaje y autorización) en una hoja de Google Sheets. El sitio solo **lee** el top 10 de apodos y puntajes; el nombre y el contacto nunca se muestran.
+Una sola hoja de Google Sheets guarda dos cosas, cada una en su pestaña (el programa las crea solo):
+
+- **Puntajes:** cada puntaje de la trivia (apodo, nombre, contacto, puntaje y autorización). El sitio solo **lee** el top 10 de apodos y puntajes; el nombre y el contacto nunca se muestran.
+- **Contactos:** cada mensaje del formulario **Contáctanos** (nombre, tipo de cliente, empresa, contacto, qué le interesa, mensaje y autorización). La columna **Estado** empieza en "Nuevo"; CityHuertas puede cambiarla a "Respondido" para llevar el control.
 
 Mientras `URL_RANKING` esté vacío en `src/config/trivia.js`, el juego funciona en **modo de prueba** (todo queda solo en el navegador de quien juega).
 
@@ -15,17 +18,27 @@ Mientras `URL_RANKING` esté vacío en `src/config/trivia.js`, el juego funciona
 2. Borra lo que aparece y pega este código:
 
 ```js
-const NOMBRE_HOJA = 'Puntajes'
+const HOJA_PUNTAJES = 'Puntajes'
+const HOJA_CONTACTOS = 'Contactos'
 const PUNTAJE_MAXIMO = 4000 // 10 preguntas × 200 puntos × racha ×2
 
-function hoja_() {
+// Devuelve la pestaña pedida y la crea con sus títulos si no existe.
+function hoja_(nombre, titulos) {
   const libro = SpreadsheetApp.getActiveSpreadsheet()
-  let hoja = libro.getSheetByName(NOMBRE_HOJA)
+  let hoja = libro.getSheetByName(nombre)
   if (!hoja) {
-    hoja = libro.insertSheet(NOMBRE_HOJA)
-    hoja.appendRow(['Fecha', 'Apodo', 'Nombre', 'Contacto', 'Puntaje', 'Aciertos', 'Autoriza datos'])
+    hoja = libro.insertSheet(nombre)
+    hoja.appendRow(titulos)
   }
   return hoja
+}
+
+function hojaPuntajes_() {
+  return hoja_(HOJA_PUNTAJES, ['Fecha', 'Apodo', 'Nombre', 'Contacto', 'Puntaje', 'Aciertos', 'Autoriza datos'])
+}
+
+function hojaContactos_() {
+  return hoja_(HOJA_CONTACTOS, ['Fecha', 'Nombre', 'Tipo de cliente', 'Empresa', 'Contacto', 'Le interesa', 'Mensaje', 'Autoriza datos', 'Estado'])
 }
 
 // Evita que un texto que empiece con = + - @ se ejecute como fórmula.
@@ -40,9 +53,19 @@ function respuesta_(datos) {
   )
 }
 
-// El sitio pide el top 10: solo apodo y puntaje.
+function agregarFila_(hoja, fila) {
+  const candado = LockService.getScriptLock()
+  candado.waitLock(10000)
+  try {
+    hoja.appendRow(fila)
+  } finally {
+    candado.releaseLock()
+  }
+}
+
+// El sitio pide el top 10 de la trivia: solo apodo y puntaje.
 function doGet() {
-  const filas = hoja_().getDataRange().getValues().slice(1)
+  const filas = hojaPuntajes_().getDataRange().getValues().slice(1)
   const ranking = filas
     .map((fila) => ({ apodo: String(fila[1]).replace(/^'/, ''), puntaje: Number(fila[4]) }))
     .filter((fila) => fila.apodo && fila.puntaje >= 0)
@@ -52,28 +75,38 @@ function doGet() {
   return respuesta_({ ranking })
 }
 
-// El sitio envía un puntaje nuevo.
+// El sitio envía un puntaje de la trivia o un mensaje de "Contáctanos".
 function doPost(evento) {
   const datos = JSON.parse(evento.postData.contents)
+  if (datos.autorizaDatos !== true) return respuesta_({ ok: false })
+
+  if (datos.tipo === 'contacto') {
+    const nombre = limpiar_(datos.nombre, 80)
+    const contacto = limpiar_(datos.contacto, 80)
+    if (!nombre || !contacto) return respuesta_({ ok: false })
+
+    agregarFila_(hojaContactos_(), [
+      new Date(),
+      nombre,
+      limpiar_(datos.tipoCliente, 40),
+      limpiar_(datos.empresa, 80),
+      contacto,
+      limpiar_(datos.producto, 80),
+      limpiar_(datos.mensaje, 1000),
+      'Sí',
+      'Nuevo',
+    ])
+    return respuesta_({ ok: true })
+  }
 
   const apodo = limpiar_(datos.apodo, 20)
   const nombre = limpiar_(datos.nombre, 80)
   const contacto = limpiar_(datos.contacto, 80)
   const puntaje = Math.max(0, Math.min(Number(datos.puntaje) || 0, PUNTAJE_MAXIMO))
   const aciertos = Math.max(0, Math.min(Number(datos.aciertos) || 0, 10))
+  if (!apodo || !nombre || !contacto) return respuesta_({ ok: false })
 
-  if (!apodo || !nombre || !contacto || datos.autorizaDatos !== true) {
-    return respuesta_({ ok: false })
-  }
-
-  const candado = LockService.getScriptLock()
-  candado.waitLock(10000)
-  try {
-    hoja_().appendRow([new Date(), apodo, nombre, contacto, puntaje, aciertos, 'Sí'])
-  } finally {
-    candado.releaseLock()
-  }
-
+  agregarFila_(hojaPuntajes_(), [new Date(), apodo, nombre, contacto, puntaje, aciertos, 'Sí'])
   return respuesta_({ ok: true })
 }
 ```
