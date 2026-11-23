@@ -1,0 +1,125 @@
+.revisar {
+  width: min(100% - 2.5rem, var(--ancho));
+  margin: 3rem auto 5rem;
+}
+
+.revisar__estados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 1.25rem;
+}
+
+.revisar__tarjeta {
+  padding: 1.5rem;
+  border: 1px solid var(--borde);
+  border-left-width: 6px;
+  border-radius: var(--radio);
+  background-color: var(--fondo-tarjeta);
+}
+
+.revisar__tarjeta--bien {
+  border-left-color: var(--verde);
+}
+
+.revisar__tarjeta--alerta {
+  border-left-color: #c2410c;
+}
+
+.revisar__tarjeta--neutro {
+  border-left-color: var(--texto-suave);
+}
+
+.revisar__tarjeta h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+
+.revisar__tarjeta--alerta h2 svg {
+  color: #c2410c;
+}
+
+.revisar__tarjeta--bien h2 svg {
+  color: var(--verde);
+}
+
+.revisar__tarjeta p,
+.revisar__tarjeta ul {
+  margin: 0.5rem 0 0;
+  color: var(--texto-suave);
+}
+
+.revisar__tarjeta ul {
+  padding-left: 1.2rem;
+}
+
+.revisar a {
+  color: var(--verde-oscuro);
+  font-weight: 600;
+}
+
+.revisar__avisos {
+  margin-top: 2.5rem;
+}
+
+.revisar__avisos h2 {
+  margin-bottom: 1rem;
+}
+
+.revisar__avisos table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--fondo-tarjeta);
+  font-size: 0.95rem;
+}
+
+.revisar__avisos th,
+.revisar__avisos td {
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--borde);
+  text-align: left;
+  vertical-align: top;
+}
+
+.revisar__avisos th {
+  color: var(--texto-suave);
+  font-weight: 600;
+}
+
+.revisar__avisos td:nth-child(2) {
+  white-space: nowrap;
+}
+
+/* En celular cada aviso se apila para no desbordar la pantalla. */
+@media (max-width: 650px) {
+  .revisar__avisos thead {
+    display: none;
+  }
+
+  .revisar__avisos tr,
+  .revisar__avisos td {
+    display: block;
+  }
+
+  .revisar__avisos tr {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--borde);
+  }
+
+  .revisar__avisos td {
+    padding: 0.15rem 0.9rem;
+    border: 0;
+  }
+
+  .revisar__avisos td:nth-child(1)::before {
+    content: 'Pestaña: ';
+    color: var(--texto-suave);
+  }
+
+  .revisar__avisos td:nth-child(2)::before {
+    content: 'Fila: ';
+    color: var(--texto-suave);
+  }
+}

@@ -4,8 +4,8 @@ import { useSyncExternalStore } from 'react'
  * Navegación basada en el hash de la URL (ej. .../cityhuertas-web/#/plantas).
  * Funciona en GitHub Pages sin configuración extra, permite usar el botón
  * "atrás" del navegador y compartir el enlace directo a cada sección.
- * Si más adelante se necesitan rutas anidadas (ej. #/plantas/mizuna),
- * se puede reemplazar por HashRouter de React Router.
+ * Admite rutas con partes, como #/plantas/mizuna-morada: App toma la
+ * primera parte como sección y pasa el resto a la página.
  */
 
 function suscribir(alCambiar) {
