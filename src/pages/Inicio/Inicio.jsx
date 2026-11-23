@@ -22,7 +22,7 @@ const secciones = [
   {
     id: 'recursos',
     titulo: 'Trivia',
-    texto: '10 preguntas contra el reloj, puntos por racha y una tabla con los mejores puntajes.',
+    texto: 'Preguntas contra el reloj, puntos por racha y una tabla con los mejores puntajes.',
     Icono: Trophy,
     color: 'hoja',
   },

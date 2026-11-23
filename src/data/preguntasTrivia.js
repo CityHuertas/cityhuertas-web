@@ -1,6 +1,6 @@
 /*
  * Banco de preguntas de la trivia agroecológica.
- * Cada partida toma 10 preguntas al azar de esta lista.
+ * Respaldo: se usa si la hoja de Google no está conectada o falla.
  *
  * Para agregar una pregunta, copia un bloque y cambia:
  *  - pregunta: el texto
