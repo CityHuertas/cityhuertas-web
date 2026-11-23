@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-import principiosCH from '../../data/principiosCH'
+import elementosFAO from '../../data/elementosFAO'
 import './PrincipiosCH.css'
 
 function PrincipiosCH() {
@@ -27,17 +27,18 @@ function PrincipiosCH() {
       aria-labelledby="titulo-principios"
     >
       <div className="principios__encabezado">
-        <h2 id="titulo-principios">Nuestros 10 principios</h2>
+        <h2 id="titulo-principios">Los 10 elementos de la agroecología</h2>
         <p>
-          La FAO describe la agroecología en 10 elementos. Así los vivimos en
-          CityHuertas, en las huertas de la ciudad. Toca un principio para
-          leer más.
+          La FAO (Organización de las Naciones Unidas para la Alimentación y la
+          Agricultura) resume la agroecología en 10 elementos que se conectan
+          entre sí. Toca uno para leer qué significa y cómo lo aplicamos en
+          CityHuertas.
         </p>
       </div>
 
       <div className="principios__lista">
-        {principiosCH.map(({ elementoFAO, titulo, frase, detalle }, indice) => (
-          <details key={titulo} className="principio">
+        {elementosFAO.map(({ nombre, idea, explicacion, enCityHuertas }, indice) => (
+          <details key={nombre} className="principio">
             <summary>
               <span className="principio__numero" aria-hidden="true">
                 {String(indice + 1).padStart(2, '0')}
@@ -45,20 +46,35 @@ function PrincipiosCH() {
 
               <span className="principio__textos">
                 <span className="principio__fao">
-                  <span className="visualmente-oculto">Principio {indice + 1}. </span>
-                  Elemento FAO: {elementoFAO}
+                  Elemento {indice + 1} de 10
                 </span>
-                <span className="principio__titulo">{titulo}</span>
-                <span className="principio__frase">“{frase}”</span>
+                <span className="principio__titulo">{nombre}</span>
+                <span className="principio__frase">{idea}</span>
               </span>
 
               <span className="principio__icono" aria-hidden="true" />
             </summary>
 
-            <p className="principio__detalle">{detalle}</p>
+            <div className="principio__detalle">
+              <p>{explicacion}</p>
+              <p className="principio__ch">
+                <strong>En CityHuertas:</strong> {enCityHuertas}
+              </p>
+            </div>
           </details>
         ))}
       </div>
+
+      <p className="principios__fuente">
+        Fuente:{' '}
+        <a
+          href="https://www.fao.org/agroecology/overview/the-10-elements-of-agroecology/es"
+          target="_blank"
+          rel="noreferrer"
+        >
+          FAO, Los 10 elementos de la agroecología
+        </a>
+      </p>
     </section>
   )
 }

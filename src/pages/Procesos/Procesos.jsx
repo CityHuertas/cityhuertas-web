@@ -54,13 +54,13 @@ function Procesos() {
 
         <div className="procesos__cierre">
           <p>
-            Todo este ciclo se guía por nuestros principios agroecológicos.
+            Todo este ciclo se guía por los 10 elementos de la agroecología de la FAO.
           </p>
           <a
             className="boton boton--borde"
             href={`${enlaceA('agroecologia')}?seccion=principios`}
           >
-            Ver los 10 principios
+            Ver los 10 elementos
           </a>
         </div>
       </section>

@@ -94,7 +94,6 @@
   margin-top: 4px;
   color: var(--texto);
   font-size: 16px;
-  font-style: italic;
   line-height: 1.5;
 }
 
@@ -142,6 +141,35 @@
   font-size: 16px;
   line-height: 1.6;
   animation: aparecer 0.25s ease both;
+}
+
+.principio__detalle p {
+  margin: 0;
+}
+
+/* Cómo se aplica el elemento en las huertas de CityHuertas. */
+.principio__ch {
+  margin-top: 12px !important;
+  padding: 12px 14px;
+  border-left: 3px solid var(--lima);
+  border-radius: 0 10px 10px 0;
+  background-color: var(--hoja);
+  color: var(--texto);
+}
+
+.principio__ch strong {
+  color: var(--verde-oscuro);
+}
+
+.principios__fuente {
+  margin: 8px 0 0;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.principios__fuente a {
+  color: var(--verde-oscuro);
+  font-weight: 600;
 }
 
 @media (max-width: 900px) {
