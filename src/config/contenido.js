@@ -15,5 +15,11 @@ export const URL_ETAPAS =
 export const URL_PREGUNTAS =
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vR3Tg9GurZJPTCfBKDDB4SunT2wEN9YeZqTyuP_pQO2azijC1SjiCEpSVJsCYIRLR3AT9bwC9YdA-wv/pub?gid=618338171&single=true&output=csv'
 
+// Pestaña Ciencia (opcional): tabla "Para saber más" de cada planta.
+// Si está vacío o la pestaña no tiene filas de una planta, la Mizuna usa
+// la tabla guardada en src/data/cienciaMizuna.js y las demás no la muestran.
+export const URL_CIENCIA =
+  'https://docs.google.com/spreadsheets/d/e/2PACX-1vR3Tg9GurZJPTCfBKDDB4SunT2wEN9YeZqTyuP_pQO2azijC1SjiCEpSVJsCYIRLR3AT9bwC9YdA-wv/pub?gid=261787887&single=true&output=csv'
+
 // Si la hoja no responde en este tiempo, se usa el contenido guardado.
 export const ESPERA_MAXIMA_MS = 8000
