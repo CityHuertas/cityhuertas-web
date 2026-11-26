@@ -1,7 +1,7 @@
 .llamado-restaurantes {
   width: var(--ancho);
   margin: 0 auto;
-  padding: 0 0 clamp(56px, 7vw, 88px);
+  padding: 0 0 clamp(40px, 5vw, 64px);
 }
 
 .llamado-restaurantes__panel {

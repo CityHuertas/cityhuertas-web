@@ -1,7 +1,7 @@
 /* Selector de plantas: solo aparece cuando la hoja tiene más de un producto. */
 .plantas__selector {
   width: min(100% - 2.5rem, var(--ancho));
-  margin: 2rem auto 0;
+  margin: 24px auto 0;
 }
 
 .plantas__selector ul {

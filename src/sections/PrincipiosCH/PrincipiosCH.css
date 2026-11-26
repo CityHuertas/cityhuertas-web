@@ -2,7 +2,7 @@
   scroll-margin-top: calc(var(--alto-header) + 16px);
   width: var(--ancho);
   margin: 0 auto;
-  padding: clamp(24px, 4vw, 48px) 0 clamp(56px, 8vw, 104px);
+  padding: clamp(16px, 2vw, 24px) 0 clamp(40px, 5vw, 64px);
 }
 
 .principios__encabezado h2 {

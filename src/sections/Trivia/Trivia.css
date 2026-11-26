@@ -1,7 +1,7 @@
 .trivia {
   width: var(--ancho);
   margin: 0 auto;
-  padding: clamp(48px, 7vw, 88px) 0;
+  padding: clamp(28px, 4vw, 48px) 0;
   display: grid;
   grid-template-columns: minmax(0, 1.75fr) minmax(280px, 1fr);
   gap: 20px;
