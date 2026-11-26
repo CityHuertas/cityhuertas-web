@@ -51,12 +51,17 @@ Sube el cambio con una rama y un Pull Request, como siempre. Desde ese momento, 
 
 ### Fotos
 
-La columna **Foto** acepta dos cosas:
+La columna **Foto** acepta tres cosas. La más fácil es Google Drive:
 
-- **Un archivo del proyecto**: súbelo en GitHub a `public/imagenes/<planta>/` (en la web de GitHub: entra a la carpeta → **Add file → Upload files**, en una rama con Pull Request) y escribe en la hoja la ruta desde `imagenes`, por ejemplo `albahaca/plantula.webp`.
-- **Un enlace completo** que empiece por `https://` (debe ser un enlace directo a la imagen).
+1. **Google Drive (recomendado).** Sube la foto a una carpeta de Drive, haz clic derecho en la foto → **Compartir** → en "Acceso general" elige **Cualquier persona con el enlace** → **Copiar enlace**, y pega ese enlace en la columna Foto. El sitio lo convierte solo en la imagen. Importante: debe ser el enlace de **la foto**, no de la carpeta.
+2. **Un archivo del proyecto:** súbelo en GitHub a `public/imagenes/<planta>/` y escribe la ruta desde `imagenes`, por ejemplo `albahaca/plantula.webp`.
+3. **Cualquier otro enlace directo** a una imagen que empiece por `https://`.
 
-Recomendado: WebP de unos 900–1000 px de ancho, con fondo claro o transparente. Si una etapa aún no tiene foto, se verá el aviso "Foto pendiente".
+Recomendado: PNG o WebP con fondo transparente, de unos 1000 px de ancho (máximo 1200), horizontal o cuadrada y de menos de 300 KB. La ficha ajusta la foto a su espacio sin estirarla. Si una etapa aún no tiene foto se verá "Foto pendiente"; si el enlace no funciona (por ejemplo, la foto no está compartida) se verá "Foto no disponible" y la página `#/revisar-contenido` dirá en qué fila está.
+
+### Mostrar solo los productos de temporada
+
+Para que en Plantas aparezca solo lo que está en cosecha, cambia la columna **Mostrar** de la pestaña Productos: **sí** para los de temporada y **no** para los demás. No hace falta borrar nada; cuando vuelva la temporada, se cambia otra vez a **sí**. Si queda un solo producto visible, el selector de plantas desaparece y se muestra directamente su ficha.
 
 ## 5. Cambiar las preguntas de la trivia
 

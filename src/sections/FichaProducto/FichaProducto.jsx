@@ -30,6 +30,8 @@ function FichaProducto({ producto, indiceEtapa, alCambiarEtapa }) {
   const pestanas = useRef([])
   const inicioToque = useRef(null)
   const [huboCambio, setHuboCambio] = useState(false)
+  // Por cada etapa, cuántas direcciones de su foto fallaron (Drive tiene dos).
+  const [fallos, setFallos] = useState({})
 
   const etapa = etapas[indiceEtapa]
   const ultima = etapas.length - 1
@@ -150,25 +152,31 @@ function FichaProducto({ producto, indiceEtapa, alCambiarEtapa }) {
           }}
         >
           {/* Todas las fotos están cargadas; solo se ve la activa (fundido). */}
-          {etapas.map((item, indice) =>
-            item.imagen ? (
+          {etapas.map((item, indice) => {
+            const fuentes = item.imagenes ?? (item.imagen ? [item.imagen] : [])
+            const fuente = fuentes.at(fallos[indice] ?? 0)
+
+            return fuente ? (
               <img
-                key={`${indice}-${item.imagen}`}
-                src={item.imagen}
+                key={`${indice}-${fuente}`}
+                src={fuente}
                 alt={indice === indiceEtapa ? `${nombre} en etapa ${item.nombre}` : ''}
                 aria-hidden={indice !== indiceEtapa}
                 className={indice === indiceEtapa ? 'visible' : ''}
                 draggable="false"
+                onError={() =>
+                  setFallos((actual) => ({ ...actual, [indice]: (actual[indice] ?? 0) + 1 }))
+                }
               />
             ) : (
               indice === indiceEtapa && (
                 <div key={`sin-foto-${indice}`} className="ficha__sin-foto">
                   <Sprout size={48} strokeWidth={1.4} aria-hidden="true" />
-                  <span>Foto pendiente</span>
+                  <span>{fuentes.length > 0 ? 'Foto no disponible' : 'Foto pendiente'}</span>
                 </div>
               )
-            ),
-          )}
+            )
+          })}
 
           <button
             className="ficha__flecha ficha__flecha--anterior"

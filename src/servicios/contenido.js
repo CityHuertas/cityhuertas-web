@@ -23,12 +23,55 @@ export function crearId(nombre) {
     .replace(/^-|-$/g, '')
 }
 
-// Una foto puede ser un enlace completo o un archivo dentro de public/imagenes/.
-export function rutaFoto(valor) {
+/*
+ * Una foto puede ser:
+ * - un enlace de Google Drive (Compartir → Copiar enlace), con el archivo
+ *   compartido como "Cualquier persona con el enlace";
+ * - cualquier otro enlace directo a una imagen (https://…);
+ * - un archivo dentro de public/imagenes/ (por ejemplo mizuna/desarrollo.webp).
+ */
+const PATRONES_DRIVE = [
+  /drive\.google\.com\/file\/(?:u\/\d+\/)?d\/([\w-]{20,})/i,
+  /(?:drive|docs)\.google\.com\/(?:open|uc|thumbnail)\?(?:[^#]*&)?id=([\w-]{20,})/i,
+  /lh3\.googleusercontent\.com\/d\/([\w-]{20,})/i,
+]
+
+// Ancho con el que se piden las fotos de Drive (suficiente para la ficha).
+const ANCHO_DRIVE = 1200
+
+export function idDrive(enlace) {
+  for (const patron of PATRONES_DRIVE) {
+    const coincidencia = enlace.match(patron)
+    if (coincidencia) return coincidencia[1]
+  }
+  return null
+}
+
+export function esCarpetaDrive(enlace) {
+  return /drive\.google\.com\/drive\/(?:u\/\d+\/)?folders\//i.test(enlace)
+}
+
+// Direcciones a probar en orden: si la primera falla, la ficha usa la siguiente.
+export function fuentesFoto(valor) {
   const limpio = (valor ?? '').trim()
-  if (!limpio) return null
-  if (/^https?:\/\//i.test(limpio)) return limpio
-  return `${import.meta.env.BASE_URL}imagenes/${limpio.replace(/^\/+/, '').replace(/^imagenes\//, '')}`
+  if (!limpio || esCarpetaDrive(limpio)) return []
+
+  // El enlace de "Compartir" de Drive abre una página, no la imagen:
+  // se usa el enlace directo del mismo archivo.
+  const id = idDrive(limpio)
+  if (id) {
+    return [
+      `https://lh3.googleusercontent.com/d/${id}=w${ANCHO_DRIVE}`,
+      `https://drive.google.com/thumbnail?id=${id}&sz=w${ANCHO_DRIVE}`,
+    ]
+  }
+
+  if (/^https?:\/\//i.test(limpio)) return [limpio]
+  return [`${import.meta.env.BASE_URL}imagenes/${limpio.replace(/^\/+/, '').replace(/^imagenes\//, '')}`]
+}
+
+export function rutaFoto(valor) {
+  return fuentesFoto(valor)[0] ?? null
 }
 
 function esNo(valor) {
@@ -39,7 +82,11 @@ function prepararProducto(producto) {
   return {
     ...producto,
     id: crearId(producto.nombre),
-    etapas: producto.etapas.map((etapa) => ({ ...etapa, imagen: rutaFoto(etapa.foto) })),
+    etapas: producto.etapas.map((etapa) => ({
+      ...etapa,
+      imagen: rutaFoto(etapa.foto),
+      imagenes: fuentesFoto(etapa.foto),
+    })),
   }
 }
 
@@ -111,8 +158,13 @@ export function procesarProductos(filasProductos, filasEtapas) {
       porDentro: fila.por_dentro || '',
       intensidad,
       imagen: rutaFoto(fila.foto),
+      imagenes: fuentesFoto(fila.foto),
+      fila: fila._fila,
     })
 
+    if (fila.foto && esCarpetaDrive(fila.foto)) {
+      aviso('Etapas', fila._fila, `La foto de "${fila.etapa}" es el enlace de una carpeta de Drive. Abre la foto, usa Compartir → Copiar enlace y pega ese enlace.`)
+    }
     if (!fila.foto) aviso('Etapas', fila._fila, `La etapa "${fila.etapa}" de ${producto.nombre} no tiene foto. Se mostrará el aviso “Foto pendiente”.`)
   })
 
