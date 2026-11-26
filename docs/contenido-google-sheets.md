@@ -69,6 +69,23 @@ Para que en Plantas aparezca solo lo que está en cosecha, cambia la columna **M
 - Con `no` en **Mostrar** se guarda la pregunta sin usarla.
 - Cada partida toma 10 preguntas al azar (o todas, si hay menos). Hacen falta al menos 3 válidas; si no, el sitio usa las preguntas guardadas en el código.
 
+## 5b. Tabla técnica "Para saber más" (opcional)
+
+Cada planta puede mostrar, debajo de su ficha, el desplegable **"Para saber más: la versión técnica"** con los compuestos que le dan el sabor. Sale de la pestaña **Ciencia**:
+
+| Producto | Grupo | Ejemplos | Efecto en el sabor | Fuente | Mostrar |
+|---|---|---|---|---|---|
+| Lechuga crespa | Lactucinas | Lactucina, lactucopicrina | Amargor suave del tallo y las hojas viejas | Autor et al., año | |
+
+- **Producto:** escrito igual que en la pestaña Productos.
+- **Una fila por grupo de compuestos.** El orden de las filas es el orden de la tabla.
+- **Fuente:** no se muestra en el sitio; queda como respaldo para el equipo de investigación. Toda afirmación debe tener su fuente.
+- **Mostrar:** opcional; "no" oculta la fila.
+- Si una planta no tiene filas, el desplegable no aparece. La **Mizuna morada** tiene una tabla guardada en el código (`src/data/cienciaMizuna.js`) que se usa mientras no tenga filas en esta pestaña.
+- Las tarjetas "¿Por qué pica y por qué amarga?" de la Mizuna están hechas a mano en el código; para otra planta, un texto así lo arma el equipo de desarrollo.
+
+La pestaña se publica como las demás (paso 2) y su enlace va en `URL_CIENCIA` de `src/config/contenido.js`.
+
 ## 6. Revisar que todo esté bien
 
 Abre la página oculta **`https://cityhuertas.github.io/cityhuertas-web/#/revisar-contenido`** (no aparece en el menú). Muestra:

@@ -1,4 +1,5 @@
-import { ESPERA_MAXIMA_MS, URL_ETAPAS, URL_PREGUNTAS, URL_PRODUCTOS } from '../config/contenido'
+import { ESPERA_MAXIMA_MS, URL_CIENCIA, URL_ETAPAS, URL_PREGUNTAS, URL_PRODUCTOS } from '../config/contenido'
+import { compuestos as compuestosMizuna } from '../data/cienciaMizuna'
 import productosLocales from '../data/productos'
 import preguntasLocales from '../data/preguntasTrivia'
 import { csvAObjetos } from './csv'
@@ -90,8 +91,21 @@ function prepararProducto(producto) {
   }
 }
 
+// Tablas técnicas guardadas en el código: se usan si la pestaña Ciencia no tiene filas de esa planta.
+const CIENCIA_EN_CODIGO = {
+  'mizuna-morada': compuestosMizuna,
+}
+
+// Le pone a cada producto su tabla técnica: la de la hoja si existe, si no la del código.
+function agregarCiencia(productos, porProducto = new Map()) {
+  return productos.map((producto) => ({
+    ...producto,
+    ciencia: porProducto.get(producto.id) ?? CIENCIA_EN_CODIGO[producto.id] ?? [],
+  }))
+}
+
 export const contenidoLocal = {
-  productos: productosLocales.map(prepararProducto),
+  productos: agregarCiencia(productosLocales.map(prepararProducto)),
   preguntas: preguntasLocales,
 }
 
@@ -217,6 +231,50 @@ export function procesarPreguntas(filas) {
   return { preguntas, avisos }
 }
 
+/* ---------- Ciencia (tabla "Para saber más") ---------- */
+
+export function procesarCiencia(filas, productos) {
+  const avisos = []
+  const ids = new Set(productos.map(({ id }) => id))
+  const porProducto = new Map()
+
+  filas.forEach((fila) => {
+    if (esNo(fila.mostrar)) return
+    const aviso = (mensaje) => avisos.push({ hoja: 'Ciencia', fila: fila._fila, mensaje })
+
+    if (!fila.producto) return aviso('Falta el producto. Se omitió la fila.')
+    const id = crearId(fila.producto)
+    if (!ids.has(id)) {
+      return aviso(`El producto "${fila.producto}" no está en la pestaña Productos (o está oculto). Revisa que el nombre sea igual.`)
+    }
+    if (!fila.grupo) return aviso('Falta el grupo (por ejemplo, "Glucosinolatos"). Se omitió la fila.')
+
+    if (!porProducto.has(id)) porProducto.set(id, [])
+    porProducto.get(id).push({
+      grupo: fila.grupo,
+      ejemplos: fila.ejemplos || '',
+      efecto: fila.efecto_en_el_sabor || fila.efecto || '',
+      fuentes: fila.fuente || fila.fuentes || '',
+    })
+  })
+
+  return { porProducto, avisos }
+}
+
+async function cargarCiencia(productos) {
+  if (!URL_CIENCIA) return { productos: agregarCiencia(productos), avisos: [] }
+
+  try {
+    const { porProducto, avisos } = procesarCiencia(await descargar(URL_CIENCIA), productos)
+    return { productos: agregarCiencia(productos, porProducto), avisos }
+  } catch (error) {
+    return {
+      productos: agregarCiencia(productos),
+      avisos: [{ hoja: 'Ciencia', fila: null, mensaje: `No se pudo leer la pestaña (${error.message}). La Mizuna usa la tabla guardada en el código.` }],
+    }
+  }
+}
+
 /* ---------- Carga ---------- */
 
 async function descargar(url) {
@@ -246,7 +304,7 @@ async function descargar(url) {
   }
 }
 
-async function cargarProductos() {
+async function cargarProductosSinCiencia() {
   if (!URL_PRODUCTOS || !URL_ETAPAS) {
     return { productos: contenidoLocal.productos, origen: 'codigo', avisos: [] }
   }
@@ -268,6 +326,12 @@ async function cargarProductos() {
       avisos: [{ hoja: 'Productos y Etapas', fila: null, mensaje: `No se pudo leer la hoja (${error.message}). Se muestra el contenido guardado en el código.` }],
     }
   }
+}
+
+async function cargarProductos() {
+  const resultado = await cargarProductosSinCiencia()
+  const ciencia = await cargarCiencia(resultado.productos)
+  return { ...resultado, productos: ciencia.productos, avisos: [...resultado.avisos, ...ciencia.avisos] }
 }
 
 async function cargarPreguntas() {

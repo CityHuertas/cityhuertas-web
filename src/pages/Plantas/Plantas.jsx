@@ -5,6 +5,7 @@ import Portada from '../../components/Portada/Portada'
 import FichaProducto from '../../sections/FichaProducto/FichaProducto'
 import CienciaMizuna from '../../sections/CienciaMizuna/CienciaMizuna'
 import DatoCurioso from '../../sections/DatoCurioso/DatoCurioso'
+import SaberMas from '../../sections/SaberMas/SaberMas'
 import LlamadoRestaurantes from '../../sections/LlamadoRestaurantes/LlamadoRestaurantes'
 import { useContenido } from '../../hooks/useContenido'
 import { enlaceA } from '../../hooks/useRuta'
@@ -19,7 +20,8 @@ function leerEtapaInicial(totalEtapas) {
   return etapa >= 1 && etapa <= totalEtapas ? etapa - 1 : 0
 }
 
-// La sección científica solo existe para la Mizuna (está escrita a mano).
+// Tarjetas explicativas hechas a mano para una planta concreta (por ahora, solo la Mizuna).
+// La tabla técnica (SaberMas) sí sirve para cualquier planta: sale de la pestaña Ciencia.
 const SECCIONES_EXTRA = {
   'mizuna-morada': CienciaMizuna,
 }
@@ -39,6 +41,7 @@ function VistaProducto({ producto }) {
       />
 
       {Extra && <Extra />}
+      <SaberMas filas={producto.ciencia} />
       <DatoCurioso texto={producto.datoCurioso} />
       <LlamadoRestaurantes producto={producto} etapa={producto.etapas[indiceEtapa]} />
     </>
