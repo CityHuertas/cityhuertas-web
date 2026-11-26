@@ -1,6 +1,6 @@
-import { ArrowUpRight, ChefHat, Leaf, ShoppingBasket, Sprout, Trophy } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, ChefHat, Leaf, ShoppingBasket, Sprout, Trophy } from 'lucide-react'
 
-import Portada from '../../components/Portada/Portada'
+import { useContenido } from '../../hooks/useContenido'
 import { enlaceA } from '../../hooks/useRuta'
 import './Inicio.css'
 
@@ -28,22 +28,90 @@ const secciones = [
   },
 ]
 
+const FOTO_PORTADA = `${import.meta.env.BASE_URL}imagenes/mizuna/planta-florida.webp`
+
+// Encabezado del Inicio: fondo verde que continúa el menú, con la Mizuna en floración.
+function PortadaInicio() {
+  const { productos } = useContenido()
+  const destacado = productos[0]
+  const miniatura = destacado?.etapas[0]?.imagenes?.[0]
+
+  return (
+    <section className="portada-inicio" aria-labelledby="titulo-inicio">
+      <div className="portada-inicio__contenido">
+        <div className="portada-inicio__texto">
+          <p className="portada-inicio__antetitulo">Agroecología urbana</p>
+          <h1 id="titulo-inicio">
+            Conoce el alimento <span>desde su origen</span>
+          </h1>
+          <p className="portada-inicio__descripcion">
+            Descubre cómo se cultiva lo que comes, quién lo cultiva y por qué la
+            agroecología cuida la tierra, el agua y a las personas.
+          </p>
+          <div className="portada-inicio__acciones">
+            <a className="boton boton--lima" href={enlaceA('plantas')}>
+              Ver las plantas <ArrowRight size={18} aria-hidden="true" />
+            </a>
+            <a className="boton boton--vidrio" href={enlaceA('agroecologia')}>
+              Conocer la agroecología
+            </a>
+          </div>
+
+          <dl className="portada-inicio__datos">
+            <div>
+              <dt>10</dt>
+              <dd>elementos de la FAO</dd>
+            </div>
+            <div>
+              <dt>4</dt>
+              <dd>etapas por planta</dd>
+            </div>
+            <div>
+              <dt>Finca Micaela</dt>
+              <dd>caso real</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div className="portada-inicio__visual">
+          <span className="portada-inicio__halo" aria-hidden="true" />
+          <img
+            className="portada-inicio__planta"
+            src={FOTO_PORTADA}
+            alt="Mizuna morada en floración, vista desde arriba"
+            width="920"
+            height="690"
+            fetchPriority="high"
+          />
+          {destacado && (
+            <a className="portada-inicio__ficha" href={enlaceA('plantas')}>
+              {miniatura && (
+                <img
+                  src={miniatura}
+                  alt=""
+                  onError={(evento) => {
+                    evento.currentTarget.hidden = true
+                  }}
+                />
+              )}
+              <span>
+                <small>Ficha interactiva</small>
+                <strong>
+                  {destacado.nombre} · {destacado.etapas.length} etapas
+                </strong>
+              </span>
+            </a>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Inicio() {
   return (
     <>
-      <Portada
-        tamano="completa"
-        idTitulo="titulo-inicio"
-        titulo="Conoce el alimento desde su origen"
-        descripcion="Descubre cómo se cultiva lo que comes, quién lo cultiva y por qué la agroecología cuida la tierra, el agua y a las personas."
-      >
-        <a className="boton" href={enlaceA('agroecologia')}>
-          Conocer la agroecología
-        </a>
-        <a className="boton boton--borde" href={enlaceA('plantas')}>
-          Ver las plantas
-        </a>
-      </Portada>
+      <PortadaInicio />
 
       {/* Qué es CityHuertas, en una frase. */}
       <section className="inicio-intro" aria-label="Sobre CityHuertas">

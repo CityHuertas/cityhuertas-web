@@ -1,7 +1,7 @@
 .ficha {
   width: var(--ancho);
   margin: 0 auto;
-  padding: clamp(48px, 7vw, 88px) 0 40px;
+  padding: clamp(24px, 3vw, 36px) 0 32px;
 }
 
 /* ---------- Encabezado ---------- */
