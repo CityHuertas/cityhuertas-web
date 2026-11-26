@@ -3,8 +3,6 @@
  *
  * URL_RANKING: dirección de la aplicación web de Google Apps Script que guarda
  * los puntajes y contactos en una hoja de Google Sheets.
- * Mientras esté vacía, el juego funciona en MODO DE PRUEBA: los puntajes se
- * guardan solo en el navegador de quien juega y nadie más los ve.
  *
  */
 export const URL_RANKING =
