@@ -6,7 +6,6 @@
  * Mientras esté vacía, el juego funciona en MODO DE PRUEBA: los puntajes se
  * guardan solo en el navegador de quien juega y nadie más los ve.
  *
- * Guía paso a paso: docs/trivia-google-sheets.md
  */
 export const URL_RANKING =
   'https://script.google.com/macros/s/AKfycbw5uMDCSjV2vmX98EninB0KNlyomEypmoxC9K3aVftFxhvvehKISCTAoRrIStTmfz5c/exec'
