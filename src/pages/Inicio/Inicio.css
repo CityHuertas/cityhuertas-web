@@ -61,29 +61,6 @@
   margin-top: 30px;
 }
 
-.portada-inicio__datos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px 40px;
-  max-width: 640px;
-  margin: 40px 0 0;
-  padding-top: 22px;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-}
-
-.portada-inicio__datos dt {
-  font-family: var(--fuente-titulos);
-  font-size: clamp(26px, 2.6vw, 36px);
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.portada-inicio__datos dd {
-  margin: 2px 0 0;
-  color: #c9d6b8;
-  font-size: 14px;
-}
-
 .portada-inicio__visual {
   position: relative;
   align-self: stretch;
@@ -111,52 +88,6 @@
   transform: translate(-46%, -46%);
 }
 
-.portada-inicio__ficha {
-  position: absolute;
-  top: clamp(24px, 6%, 56px);
-  right: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 16px 10px 10px;
-  border-radius: 18px;
-  color: var(--texto);
-  background-color: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
-  text-decoration: none;
-  transition: transform 0.2s ease;
-}
-
-.portada-inicio__ficha:hover {
-  transform: translateY(-3px);
-}
-
-.portada-inicio__ficha:focus-visible {
-  outline: 3px solid var(--lima);
-  outline-offset: 3px;
-}
-
-.portada-inicio__ficha img {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  background-color: var(--hoja);
-  object-fit: contain;
-}
-
-.portada-inicio__ficha small {
-  display: block;
-  color: var(--morado);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.portada-inicio__ficha strong {
-  color: var(--verde-oscuro);
-  font-family: var(--fuente-titulos);
-  font-size: 17px;
-}
-
 @media (max-width: 900px) {
   .portada-inicio__contenido {
     grid-template-columns: 1fr;
@@ -176,22 +107,11 @@
     width: min(100%, 460px);
     transform: translate(-50%, -50%);
   }
-
-  .portada-inicio__ficha {
-    top: auto;
-    right: auto;
-    bottom: 16px;
-    left: 0;
-  }
 }
 
 @media (max-width: 650px) {
   .portada-inicio__acciones .boton {
     flex: 1 1 100%;
-  }
-
-  .portada-inicio__datos {
-    gap: 14px 28px;
   }
 
   .portada-inicio__visual {

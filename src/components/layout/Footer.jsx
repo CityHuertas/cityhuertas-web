@@ -38,7 +38,6 @@ function Footer() {
 
       <div className="footer-creditos">
         <p>© {new Date().getFullYear()} CityHuertas</p>
-        <p>Caso inicial: Mizuna morada de Finca Micaela</p>
       </div>
     </footer>
   )

@@ -1,6 +1,5 @@
 import { ArrowRight, ArrowUpRight, ChefHat, Leaf, ShoppingBasket, Sprout, Trophy } from 'lucide-react'
 
-import { useContenido } from '../../hooks/useContenido'
 import { enlaceA } from '../../hooks/useRuta'
 import './Inicio.css'
 
@@ -32,10 +31,6 @@ const FOTO_PORTADA = `${import.meta.env.BASE_URL}imagenes/mizuna/planta-florida.
 
 // Encabezado del Inicio: fondo verde que continúa el menú, con la Mizuna en floración.
 function PortadaInicio() {
-  const { productos } = useContenido()
-  const destacado = productos[0]
-  const miniatura = destacado?.etapas[0]?.imagenes?.[0]
-
   return (
     <section className="portada-inicio" aria-labelledby="titulo-inicio">
       <div className="portada-inicio__contenido">
@@ -56,21 +51,6 @@ function PortadaInicio() {
               Conocer la agroecología
             </a>
           </div>
-
-          <dl className="portada-inicio__datos">
-            <div>
-              <dt>10</dt>
-              <dd>elementos de la FAO</dd>
-            </div>
-            <div>
-              <dt>4</dt>
-              <dd>etapas por planta</dd>
-            </div>
-            <div>
-              <dt>Finca Micaela</dt>
-              <dd>caso real</dd>
-            </div>
-          </dl>
         </div>
 
         <div className="portada-inicio__visual">
@@ -83,25 +63,6 @@ function PortadaInicio() {
             height="690"
             fetchPriority="high"
           />
-          {destacado && (
-            <a className="portada-inicio__ficha" href={enlaceA('plantas')}>
-              {miniatura && (
-                <img
-                  src={miniatura}
-                  alt=""
-                  onError={(evento) => {
-                    evento.currentTarget.hidden = true
-                  }}
-                />
-              )}
-              <span>
-                <small>Ficha interactiva</small>
-                <strong>
-                  {destacado.nombre} · {destacado.etapas.length} etapas
-                </strong>
-              </span>
-            </a>
-          )}
         </div>
       </div>
     </section>
