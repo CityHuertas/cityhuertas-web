@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { CircleCheck, Mail, MessageCircle } from 'lucide-react'
+import { Camera, CircleCheck, Mail, MessageCircle } from 'lucide-react'
 
-import Portada from '../../components/Portada/Portada'
+import { instagram, whatsapp } from '../../data/canales'
 import { useContenido } from '../../hooks/useContenido'
 import { enlaceA } from '../../hooks/useRuta'
 import { enviarContacto, modoPruebaContacto } from '../../servicios/contacto'
@@ -170,10 +170,9 @@ function Formulario({ productos }) {
 
       <div className="contacto__fila">
         <div className="contacto__campo">
-          <label htmlFor="contacto-empresa">Restaurante o empresa</label>
-          <p className="contacto__ayuda" id="ayuda-empresa">
-            Opcional.
-          </p>
+          <label htmlFor="contacto-empresa">
+            Restaurante o empresa <span className="contacto__opcional">(opcional)</span>
+          </label>
           <input
             id="contacto-empresa"
             name="empresa"
@@ -181,15 +180,11 @@ function Formulario({ productos }) {
             onChange={cambiar}
             autoComplete="organization"
             maxLength={80}
-            aria-describedby={ayudaYError('empresa', true)}
           />
         </div>
 
         <div className="contacto__campo">
           <label htmlFor="contacto-contacto">Correo o celular *</label>
-          <p className="contacto__ayuda" id="ayuda-contacto">
-            Por aquí te respondemos.
-          </p>
           <input
             id="contacto-contacto"
             name="contacto"
@@ -198,7 +193,8 @@ function Formulario({ productos }) {
             autoComplete="email"
             maxLength={80}
             aria-invalid={Boolean(errores.contacto)}
-            aria-describedby={ayudaYError('contacto', true)}
+            placeholder="nombre@correo.com o 300 123 4567"
+            aria-describedby={ayudaYError('contacto')}
           />
           {error('contacto')}
         </div>
@@ -218,14 +214,16 @@ function Formulario({ productos }) {
       </div>
 
       <div className="contacto__campo">
-        <label htmlFor="contacto-mensaje">Mensaje</label>
+        <label htmlFor="contacto-mensaje">
+          Mensaje <span className="contacto__opcional">(opcional)</span>
+        </label>
         <p className="contacto__ayuda" id="ayuda-mensaje">
-          Opcional. Por ejemplo: cantidades, frecuencia o la etapa de cosecha que buscas.
+          Por ejemplo: cantidades, frecuencia o la etapa de cosecha que buscas.
         </p>
         <textarea
           id="contacto-mensaje"
           name="mensaje"
-          rows={5}
+          rows={4}
           maxLength={1000}
           value={valores.mensaje}
           onChange={cambiar}
@@ -270,7 +268,7 @@ function Formulario({ productos }) {
           comunicarnos contigo sobre los productos y actividades de
           CityHuertas. No los publicamos ni los compartimos con terceros.
           Puedes pedir en cualquier momento que los actualicemos o los
-          borremos escribiéndonos por nuestros canales de contacto.
+          borremos escribiéndonos por WhatsApp o Instagram.
         </p>
       </details>
 
@@ -297,35 +295,55 @@ function Contacto() {
   const { listo, productos } = useContenido()
 
   return (
-    <>
-      <Portada
-        idTitulo="titulo-contacto"
-        titulo="Contáctanos"
-        descripcion="¿Tienes un restaurante, un hotel o quieres comprar nuestras cosechas? Déjanos tus datos y te escribimos."
-      />
+    <section className="contacto" aria-labelledby="titulo-contacto">
+      <aside className="contacto__lado">
+        <h1 id="titulo-contacto">Contáctanos</h1>
+        <p className="contacto__intro">
+          ¿Tienes un restaurante, un hotel o quieres comprar nuestras cosechas?
+          Déjanos tus datos y te escribimos.
+        </p>
 
-      <section className="contacto" aria-label="Formulario de contacto">
-        <aside className="contacto__lado">
-          <h2>¿Qué pasa después?</h2>
-          <ol>
-            <li>
-              <Mail size={20} aria-hidden="true" />
-              <span>Recibimos tus datos y revisamos qué buscas.</span>
-            </li>
-            <li>
-              <MessageCircle size={20} aria-hidden="true" />
+        <h2>¿Qué pasa después?</h2>
+        <ol>
+          <li>
+            <Mail size={20} aria-hidden="true" />
+            <span>Recibimos tus datos y revisamos qué buscas.</span>
+          </li>
+          <li>
+            <MessageCircle size={20} aria-hidden="true" />
+            <span>
+              Te escribimos al correo o celular que nos dejes para contarte qué
+              hay en cosecha y cómo comprar.
+            </span>
+          </li>
+        </ol>
+
+        <h2>¿Prefieres escribirnos directo?</h2>
+        <ul className="contacto__canales">
+          <li>
+            <a href={whatsapp.url} target="_blank" rel="noopener noreferrer">
+              <MessageCircle size={22} aria-hidden="true" />
               <span>
-                Te escribimos al correo o celular que nos dejes para contarte
-                qué hay en cosecha y cómo comprar.
+                <strong>{whatsapp.nombre}</strong>
+                {whatsapp.texto}
               </span>
-            </li>
-          </ol>
-        </aside>
+            </a>
+          </li>
+          <li>
+            <a href={instagram.url} target="_blank" rel="noopener noreferrer">
+              <Camera size={22} aria-hidden="true" />
+              <span>
+                <strong>{instagram.nombre}</strong>
+                {instagram.texto}
+              </span>
+            </a>
+          </li>
+        </ul>
+      </aside>
 
-        {/* La key espera a que carguen las plantas para preseleccionar el producto. */}
-        <Formulario key={listo ? 'listo' : 'cargando'} productos={productos} />
-      </section>
-    </>
+      {/* La key espera a que carguen las plantas para preseleccionar el producto. */}
+      <Formulario key={listo ? 'listo' : 'cargando'} productos={productos} />
+    </section>
   )
 }
 

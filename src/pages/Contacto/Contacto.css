@@ -1,24 +1,85 @@
 .contacto {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 8fr);
   gap: clamp(24px, 4vw, 56px);
+  align-items: start;
   width: var(--ancho);
   margin: 0 auto;
-  padding: clamp(32px, 5vw, 64px) 0 clamp(56px, 8vw, 104px);
+  padding: clamp(28px, 4vw, 48px) 0 clamp(48px, 6vw, 80px);
+}
+
+.contacto__lado h1 {
+  margin: 0;
+  color: var(--verde-oscuro);
+  font-family: var(--fuente-titulos);
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.contacto__intro {
+  margin: 14px 0 0;
+  color: var(--texto-suave);
+  font-size: 17px;
+  line-height: 1.55;
 }
 
 .contacto__lado h2 {
-  margin: 0 0 16px;
+  margin: 28px 0 12px;
   color: var(--verde-oscuro);
-  font-size: 24px;
+  font-size: 20px;
 }
 
-.contacto__lado ol {
+.contacto__lado ol,
+.contacto__canales {
   display: grid;
-  gap: 16px;
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.contacto__canales {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.contacto__lado .contacto__canales li {
+  display: block;
+}
+
+.contacto__canales a {
+  display: flex;
+  height: 100%;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background-color: var(--fondo-tarjeta);
+  color: var(--texto);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.contacto__canales a:hover {
+  border-color: var(--verde);
+  background-color: var(--hoja);
+}
+
+.contacto__canales a:focus-visible {
+  outline: 3px solid var(--lima);
+  outline-offset: 2px;
+}
+
+.contacto__canales span {
+  display: grid;
+  color: var(--texto-suave);
+  font-size: 15px;
+}
+
+.contacto__canales strong {
+  color: var(--verde-oscuro);
+  font-size: 16px;
 }
 
 .contacto__lado li {
@@ -44,13 +105,13 @@
 
 .contacto__formulario {
   display: grid;
-  gap: 18px;
+  gap: 14px;
 }
 
 .contacto__fila {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  gap: 14px 18px;
 }
 
 .contacto__campo {
@@ -64,6 +125,15 @@
   font-weight: 600;
 }
 
+.contacto__opcional {
+  color: var(--texto-suave);
+  font-weight: 400;
+}
+
+.contacto__campo input::placeholder {
+  color: #9a9d94;
+}
+
 .contacto__ayuda {
   margin: -2px 0 2px;
   color: var(--texto-suave);
@@ -74,8 +144,8 @@
 .contacto__campo select,
 .contacto__campo textarea {
   width: 100%;
-  min-height: 48px;
-  padding: 10px 14px;
+  min-height: 44px;
+  padding: 9px 14px;
   border: 1px solid var(--borde);
   border-radius: 12px;
   background-color: #fff;
